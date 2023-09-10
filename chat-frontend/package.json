@@ -1,0 +1,30 @@
+{
+  "name": "chat-frontend",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@chakra-ui/react": "^2.8.0",
+    "@heroicons/react": "^2.0.18",
+    "@tabler/icons": "^2.30.0",
+    "@tabler/icons-react": "^2.30.0",
+    "autoprefixer": "10.4.14",
+    "cookie": "^0.5.0",
+    "formik": "^2.4.3",
+    "jwt-decode": "^3.1.2",
+    "moment": "^2.29.4",
+    "next": "13.4.12",
+    "postcss": "8.4.27",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "socket.io-client": "^4.7.2",
+    "tailwindcss": "3.3.3",
+    "yup": "^1.2.0",
+    "zustand": "^4.4.1"
+  }
+}
