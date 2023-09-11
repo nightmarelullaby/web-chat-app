@@ -3,7 +3,7 @@ import {useEffect} from "react"
 import {useSocket} from "@/hooks/useSocket"
 import {useSocketStore} from "@/store/useSocketStore"
 import {useUserInformationStore} from "@/store/useUserInformationStore"
-const URL = "http://localhost:3001"
+const URL = "https://chat-backend-r4ns.onrender.com"
 export default function SocketInitializer(){
     const [socket,isConnected] = useSocket(URL,{auth:{mongoId:useUserInformationStore.getState().userInfo._id}})
     const {setCurrentSocket,currentSocket} = useSocketStore()
