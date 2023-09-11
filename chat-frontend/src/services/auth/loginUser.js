@@ -1,3 +1,4 @@
+import Cookies from "js-cookie"
 export const loginUser = async (data) => {
 	
 	const bodyContent = data
@@ -20,5 +21,7 @@ export const loginUser = async (data) => {
 		throw new Error(error.message)
 	}	
 	const responseParsed = await registerRequest.json()
+	console.log(responseParsed)
+	Cookies.set('access_token', responseParsed.token)
 	return responseParsed
 }
