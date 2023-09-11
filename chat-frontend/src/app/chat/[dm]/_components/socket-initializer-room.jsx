@@ -13,7 +13,7 @@ useEffect(() => {
 
 useEffect(() =>{
     console.log("here are the socket",url,id,chatId, socket)
-    if(!isConnected) return
+    // if(!isConnected) return
     console.log("after set",socket)
     socket.emit('client:join-chat',chatId)
     socket.on("server:added-message",(msg) => console.log(msg))
