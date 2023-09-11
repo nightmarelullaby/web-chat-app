@@ -13,6 +13,7 @@ export default function ChatHandler({headerTitle,response,id}){
 	const {newMessage,setNewMessage} = useCurrentMessages()
 	const {currentSocket} = useSocketStore()
 	const {userInfo} = useUserInformationStore()
+	console.log(currentSocket)
 
 	useEffect(() => {
 		if(Object.values(newMessage).length === 0 ) return;
