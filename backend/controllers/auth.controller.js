@@ -19,7 +19,7 @@ const login = async (req, res) => {
     
         res.cookie("token", token, {
             expires:new Date(Date.now() + 9999999),
-            httpOnly:false,
+            httpOnly:true,
             secure:true
         })    
         req.user = userFound._id
