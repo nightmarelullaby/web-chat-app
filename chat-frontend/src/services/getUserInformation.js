@@ -9,7 +9,7 @@ export const getUserInformation = async (data) => {
  		"Content-Type": "application/json"
 	}
 	console.log(value)
-let response = await fetch("http://localhost:3001/api/auth/verify", { 
+let response = await fetch("https://chat-backend-r4ns.onrender.com/api/auth/verify", { 
   method: "GET",
   headers: headersList
 },{cache:"no-store"});

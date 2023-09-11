@@ -2,7 +2,7 @@
 import { io } from 'socket.io-client';
 import {useEffect,useState} from "react"
 import socketioEvents from "@/utils/socketio.events.js"
-const URL = 'http://localhost:3001';
+const URL = 'https://chat-backend-r4ns.onrender.com';
 let socket
 export default function SocketController({token,id}){
 	if(!token) return

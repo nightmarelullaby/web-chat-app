@@ -9,7 +9,7 @@ export const createChat = async (id) => {
 		},
 	}
 	
-let response = await fetch("http://localhost:3001/api/createChat", { 
+let response = await fetch("https://chat-backend-r4ns.onrender.com/api/createChat", { 
   method: "POST",
   headers: headersList,
   body:JSON.stringify(bodyContent),

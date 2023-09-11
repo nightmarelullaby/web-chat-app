@@ -4,7 +4,7 @@ export const loginUser = async (data) => {
 	const fetchBody = {
 
 	}
-	const URL = "http://localhost:3001/api/auth/login"
+	const URL = "https://chat-backend-r4ns.onrender.com/api/auth/login"
 
 		const registerRequest = await fetch(URL , {
 		method: 'POST',

@@ -6,7 +6,7 @@ export const getAllFriendsUsers = async (input) => {
 
 	}
 	
-let response = await fetch("http://localhost:3001/api/getAllFriends?q="+input, { 
+let response = await fetch("https://chat-backend-r4ns.onrender.com/api/getAllFriends?q="+input, { 
   method: "GET",
   headers: headersList,
   credentials: 'include', 

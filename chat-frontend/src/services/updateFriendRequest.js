@@ -12,7 +12,7 @@ export const updateFriendRequest = async (status,friendRequestId,toUserId) => {
 		}
 	}
 	
-let response = await fetch("http://localhost:3001/api/updateFriendRequestStatus", { 
+let response = await fetch("https://chat-backend-r4ns.onrender.com/api/updateFriendRequestStatus", { 
   method: "PUT",
   headers: headersList,
   body:JSON.stringify(bodyContent),

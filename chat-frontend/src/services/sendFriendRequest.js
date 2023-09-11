@@ -8,7 +8,7 @@ export const sendFriendRequest = async (id) => {
 			id}
 	}
 	
-let response = await fetch("http://localhost:3001/api/sendFriendRequest", { 
+let response = await fetch("https://chat-backend-r4ns.onrender.com/api/sendFriendRequest", { 
   method: "POST",
   headers: headersList,
   body:JSON.stringify(bodyContent),

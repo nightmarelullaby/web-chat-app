@@ -3,7 +3,7 @@ export const registerUser = async (data) => {
 	const fetchBody = {
 
 	}
-	const URL = "http://localhost:3001/api/auth/register"
+	const URL = "https://chat-backend-r4ns.onrender.com/api/auth/register"
 
 		const registerRequest = await fetch(URL , {
 		method: 'POST',
