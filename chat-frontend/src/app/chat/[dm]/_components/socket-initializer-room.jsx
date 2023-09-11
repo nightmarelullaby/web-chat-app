@@ -7,6 +7,7 @@ export default function SocketInitializer({url,id,chatId}){
     const [socket,isConnected] = useSocket(url,{auth:{mongoId:id}})
 
 useEffect(() =>{
+    console.log("here are the socket",url,id,chatId, socket)
     if(!isConnected) return
     useSocketStore.setState({currentSocket:socket})
     socket.emit('client:join-chat',chatId)
