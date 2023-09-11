@@ -8,7 +8,7 @@ export const loginUser = async (data) => {
 
 		const registerRequest = await fetch(URL , {
 		method: 'POST',
-		credentials: 'include', 
+		// credentials: 'include', 
 		headers: {
       		'Content-Type': 'application/json'
     	},
@@ -20,6 +20,5 @@ export const loginUser = async (data) => {
 		throw new Error(error.message)
 	}	
 	const responseParsed = await registerRequest.json()
-	console.log(responseParsed)
 	return responseParsed
 }
