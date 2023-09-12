@@ -13,8 +13,6 @@ export default function ChatHandler({headerTitle,response,id}){
 	const {newMessage,setNewMessage} = useCurrentMessages()
 	const {currentSocket} = useSocketStore()
 	const {userInfo} = useUserInformationStore()
-	console.log(currentSocket)
-
 	useEffect(() => {
 		if(Object.values(newMessage).length === 0 ) return;
 		setCurrentMessages(newMessage.messages)
@@ -22,8 +20,8 @@ export default function ChatHandler({headerTitle,response,id}){
 
 	useEffect(() => {
 		if(!currentSocket) return
-		currentSocket.on("server:added-message",(msg) => {
-			console.log(msg,"new msg!")
+			currentSocket.on("server:added-message",(msg) => {
+				console.log(msg)
 			return setCurrentMessages(msg.messages)})
 	},[currentSocket])
 
@@ -38,8 +36,9 @@ export default function ChatHandler({headerTitle,response,id}){
 
 	return 		  <>  <Flex height="100%" direction="column">
       <ChatContainerHeader title={headerTitle} />
-      <Flex direction="column" height="100%" pl="4" gap="4" bg="white" mt="auto" overflow="scroll">
-        {Array.isArray(currentMessages) && currentMessages.map(message => <ChatMessage content={message.content} author={message.authorId.username}/>)}
+      <Flex direction="column" height="100%" p="4" gap="4" bg="white" mt="auto" overflowY="scroll">
+        {Array.isArray(currentMessages) && currentMessages.map(message => <ChatMessage sender={message.authorId === userInfo._id ? true: false} content={message.content} author={message.authorId.username}/>)}
+      
       </Flex>
        <ChatInput onSubmit={handleSubmit}/>
       </Flex>
