@@ -22,7 +22,9 @@ export default function ChatHandler({headerTitle,response,id}){
 
 	useEffect(() => {
 		if(!currentSocket) return
-		currentSocket.on("server:added-message",(msg) => setCurrentMessages(msg.messages))
+		currentSocket.on("server:added-message",(msg) => {
+			console.log(msg,"new msg!")
+			return setCurrentMessages(msg.messages)})
 	},[currentSocket])
 
 	const handleSubmit = async (values,actions) => {

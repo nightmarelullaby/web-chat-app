@@ -18,6 +18,7 @@ export default (io) => {
             const chatFound = await Chat.findByIdAndUpdate(data.chatId,{"$push":{messages:newMessage}},{new:true})
 
             io.to(data.chatId.toString()).emit("server:added-message",chatFound);
+            return console.log("emitted message",data.content)
         })
 
         socket.on('client:join-chat', async (data) => {
