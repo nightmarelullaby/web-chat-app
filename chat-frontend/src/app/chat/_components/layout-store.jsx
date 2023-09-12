@@ -18,10 +18,13 @@ export default function LayoutStore({children}){
 	const {userInfo} = useUserInformationStore()
     const chats = userInfo.chats.map((chat,index) => {
         let [users] = chat.users.filter(i => i._id !== userInfo._id)
-        console.log(userInfo.chats)
+        if(!users) return {
+            lastMessage:{content:"",date:""},
+            id:chat._id,
+            username:users.username,
+        }
         return { 
-
-            lastMessage:{content:chat.messages[0].content,date:moment(new Date(chat.messages[0].date)).startOf('day').fromNow()},
+            lastMessage:{content:chat.messages[0]?.content,date:moment(new Date(chat.messages[0]?.date)).startOf('day').fromNow()},
             id:chat._id,
             username:users.username,
          }

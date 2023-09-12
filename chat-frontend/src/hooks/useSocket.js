@@ -9,8 +9,11 @@ const useSocket = (URL,options) => {
 
 	useEffect(() => {
 		if(isConnected) return;
+		socketio.connect()
 		setSocket(socketio)
 		setIsConnected(socketio.connected)
+		
+
 
 		return () => {
 			if(!socket) return
