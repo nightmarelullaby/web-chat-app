@@ -22,7 +22,6 @@ export default function ChatHandler({headerTitle,response,id}){
 
 	useEffect(() => {
 		if(!currentSocket) return
-			console.log("inside chat-handler!",currentSocket)
 		currentSocket.on("server:added-message",(msg) => setCurrentMessages(msg.messages))
 	},[currentSocket])
 

@@ -26,7 +26,6 @@ const userSchema = new Schema({
     }],
     status:{
         type:String,
-        unique:true,
     },
     chats: [{
         type: Schema.Types.ObjectId,
