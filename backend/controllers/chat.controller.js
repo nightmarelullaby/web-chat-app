@@ -2,6 +2,7 @@ import Chat,{Message} from "../models/chat.model.js"
 import User from "../models/user.model.js"
 import bcrypt from "bcryptjs"
 import jwt from "jsonwebtoken"
+import { Types } from "mongoose"
 
 import { TOKEN_SECRET } from "../config.js";
 import mongoose from "mongoose";
@@ -25,7 +26,7 @@ const createChat = async (req, res) => {
             authorId,
         })
         const newChat = new Chat({
-            users: [req.user.id, toUser.id],
+            users: [new Types.ObjectId(req.user.id), new Types.ObjectId(toUser.id)],
             messages: [newMessage]
         })
         const authorData = await User.findById(authorId)
