@@ -10,14 +10,14 @@ export default (io) => {
 		console.log("new socket connected",socket.id)
 
         socket.on('client:add-message', async (data)=> {
-            console.log(data.chatId,"hola tio xd")
             const newMessage = new Message({
                 content:data.content,
                 authorId:data.authorId,
             })
-            const chatFound = await Chat.findByIdAndUpdate(data.chatId,{"$push":{messages:newMessage}},{new:true}).populate("users")
+            const chatFound = await Chat.findByIdAndUpdate(data.chatId,{"$push":{messages:newMessage}},{new:true})
+            const chats = await Chat.findById(data.chatId).populate("users")
 
-            io.to(data.chatId.toString()).emit("server:added-message",chatFound);
+            io.to(data.chatId.toString()).emit("server:added-message",chats);
         })
 
         socket.on('client:join-chat', async (data) => {
