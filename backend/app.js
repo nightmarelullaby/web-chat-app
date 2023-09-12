@@ -10,7 +10,7 @@ const app = express()
 app.use(cookieParser())
 
 app.use(cors({
-  origin:"*",
+  origin:["http://localhost:3000","https://web-chat-app-kappa.vercel.app"],
   credentials: true,
 }))
 
