@@ -27,10 +27,11 @@ export default function ChatHandler({headerTitle,response,id}){
 			return setCurrentMessages(msg.messages)})
 	},[currentSocket])
 
-	const handleSubmit = async (values,actions) => {
+	const handleSubmit = (values,actions) => {
 		const {input} = values
 		if(input === "") return;
 		let bodyContent = {authorId:userInfo._id,content:input,chatId:response._id}
+		console.log(currentSocket,"so we emit the msg")
 		currentSocket.emit("client:add-message",bodyContent)
 		return actions.resetForm()
 	}
