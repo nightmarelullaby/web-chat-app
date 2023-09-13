@@ -11,7 +11,6 @@ export const getChatById = async (id) => {
 let response = await fetch("https://chat-backend-r4ns.onrender.com/api/getChatById/"+id, { 
   method: "GET",
   headers: headersList,
-  credentials: 'include', 
 },{cache:"no-store"});
 
 if(response.status !== 200){

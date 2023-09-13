@@ -18,6 +18,7 @@ import { useOutsideClick } from '@chakra-ui/react'
 
 export const Searchbar = ({isLoading=false,onAddFriend=()=>null,onChangeValue=()=>null,data=[]}) =>{
   const [isOpen,setIsOpen] =  useState(false)
+  const [isAddingFriend,setIsAddingFriend] = useState(false)
   const [innerValue,setInnerValue] = useState("")
   const inputWraperRef = useRef()
   useEffect(() =>{
@@ -74,7 +75,11 @@ export const Searchbar = ({isLoading=false,onAddFriend=()=>null,onChangeValue=()
       return <HStack key={friend.id} p="2"  role="group" borderRadius="8" _hover={{bg:"gray.100", }}>
         <Avatar size="xs" />
           <Text as="p" fontSize="14px" color="gray.700" fontFamily="system-ui"  fontWeight="700">{friend.username}</Text>
-           <Button onClick={()=>onAddFriend(friend._id)}ml="auto" _groupHover={{outlineColor:"gray.400"}} variant="icon-outline">
+           <Button onClick={async ()=>{
+              setIsAddingFriend(true)
+              await onAddFriend(friend._id)
+              return setIsAddingFriend(false)
+            }} isLoading={isAddingFriend} ml="auto" _groupHover={{outlineColor:"gray.400"}} variant="icon-outline">
           <IconUserPlus 
             size={16} 
             color="#2d3748"

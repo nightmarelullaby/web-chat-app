@@ -1,24 +1,9 @@
 import Cookies from "js-cookie"
-
+import axios from "axios"
 export const getAllFriendsUsers = async (input) => {
-	const token = Cookies.get("token")
-	let headersList = {
- 		"Accept": "*/*",
- 		"Content-Type": "application/json",
-	}
-	
-let response = await fetch("https://chat-backend-r4ns.onrender.com/api/getAllFriends?q="+input, { 
-  method: "GET",
-  headers: headersList, 
-  credentials:'include'
-});
+	let response = await fetch("/api/get-all-friends?q="+input);
+	const json = await response.json()
+	return json
 
-if(response.status !== 200){
-		const message = await response.json()
-		console.log("error",message)
-		throw new Error("error!")
-	}	
-	const responseParsed = await response.json()
-	return responseParsed
 }
 
