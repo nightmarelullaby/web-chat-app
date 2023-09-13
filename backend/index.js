@@ -9,7 +9,7 @@ const server = http.createServer(app);
 const httpServer = server.listen(3001);
 const io = new WebSocketServer(httpServer,{
     cors:{
-      origin:["http://localhost:3000","https://web-chat-app-kappa.vercel.app"],
+      origin:"http://localhost:3000",
     }
 });
 Sockets(io);

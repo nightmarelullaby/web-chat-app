@@ -39,7 +39,7 @@ const sendFriendRequest = async (req, res) => {
 }
 const getAllFriendUsers = async (req,res) => {
     const query = req.query.q
-    console.log(query)
+
     try{
         const userId = new Types.ObjectId(req.user.id)
         if(!userId) res.status(400).json({message:"User id doesn't exists"})

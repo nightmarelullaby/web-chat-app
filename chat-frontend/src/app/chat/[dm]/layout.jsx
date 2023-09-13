@@ -4,7 +4,7 @@ import { useUserInformationStore } from "@/store/useUserInformationStore"
 console.log(useUserInformationStore.getState().userInfo)
 export default function DmLayout({children,params}){
 	return <>
-		<SocketRoomEvents url={URL} chatId={params.dm}id={useUserInformationStore.getState().userInfo._id}/>
+		<SocketRoomEvents chatId={params.dm}/>
 		{children}
 		</>
 }

@@ -3,7 +3,7 @@ import { TOKEN_SECRET } from "../config.js"
 export async function authRequired(req,res,next){
     try{
         const {token} = req.cookies
-        console.log("token is here",token)
+        console.log("token is here",token,req.cookies)
         if(!token) return res.status(401).json({message:"Unauthorized"})
 
         jwt.verify(token,TOKEN_SECRET,(error,user) => {

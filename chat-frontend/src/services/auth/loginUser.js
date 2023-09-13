@@ -22,6 +22,6 @@ export const loginUser = async (data) => {
 	}	
 	const responseParsed = await registerRequest.json()
 	console.log(responseParsed)
-	Cookies.set('token', responseParsed.token)
+	Cookies.set('token', responseParsed.token,{ expires: 365})
 	return responseParsed
 }
