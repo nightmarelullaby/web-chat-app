@@ -15,14 +15,12 @@ export default function SocketInitializer({userId,URL}){
 
     useEffect(() =>{
         if(!currentSocket) return
-
         currentSocket.on("server:status-updated",(updated) => {
             return useUserInformationStore.setState({userInfo:updated})
         })
         return () => {
             currentSocket.off("server:status-updated",(msg) => console.log(msg))
         }
-
     },[isConnected])
     return null
 }    

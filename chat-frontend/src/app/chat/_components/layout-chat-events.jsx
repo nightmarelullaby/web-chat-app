@@ -8,6 +8,7 @@ export default function LayoutChatEvents(){
 
 	useEffect(() => {
 		if(!currentSocket) return;
+		console.log(currentSocket)
 		currentSocket.on("server:send-notification", (data) => {
 		console.log("you recived a new notification!",data)
 		const prev = useUserInformationStore.getState().userInfo.friendRequests

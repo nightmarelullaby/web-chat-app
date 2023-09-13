@@ -12,11 +12,7 @@ const useSocket = (URL,options) => {
 		socketio.connect()
 		setSocket(socketio)
 		setIsConnected(socketio.connected)
-		
-
-
 		return () => {
-			if(!socket) return
 			socket.disconnect()
 		}
 	},[isConnected])
