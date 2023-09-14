@@ -13,7 +13,7 @@ const useSocket = (URL,options) => {
 		setSocket(socketio)
 		setIsConnected(socketio.connected)
 		return () => {
-			socket.disconnect()
+			socket?.disconnect()
 		}
 	},[isConnected])
 

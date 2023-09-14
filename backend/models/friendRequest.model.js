@@ -5,7 +5,7 @@ export const friendRequestSchema = new Schema({
     from: {
         id:{
             type: Schema.Types.ObjectId,
-            ref: "user"    
+            ref: "user",
         },
         username:{
             type:String
@@ -59,10 +59,11 @@ friendRequest.watch()
             const allSockets = await io.fetchSockets()
             const [socketFiltered] = allSockets.filter(socket => socket.handshake.auth.mongoId === userThatWillBeNotified)
             const socketFilteredId = socketFiltered.id
-            console.log("sended",socketFilteredId)
+            
             return io.to(socketFilteredId).emit("server:send-notification",data.fullDocument);
+            console.log("sended",data.fullDocument)
         }catch(error){
-            console.log(error.message)
+            console.log(error.message,"here is a error xd")
         }
         
 

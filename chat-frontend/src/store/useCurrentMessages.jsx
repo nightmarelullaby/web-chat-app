@@ -1,5 +1,5 @@
 import {create} from "zustand";
 export const useCurrentMessages = create((set) => ({
-  newMessage:{},
-  setNewMessage:(message) => set((state) => ({messages:message})) 
+  messages:{},
+  addNewMessage:(message) => set((state) => ({messages:state.messages.push(message)})) 
 }));

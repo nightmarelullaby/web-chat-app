@@ -4,29 +4,26 @@ import {useEffect} from "react"
 import {useUserInformationStore} from "@/store/useUserInformationStore"
 
 export default function LayoutChatEvents(){
-	const {setCurrentSocket,currentSocket} = useSocketStore()
+	const {currentSocket} = useSocketStore()
 
+	const handleNotificationReceived = (data) => {
+		const prev = useUserInformationStore.getState().friendRequests
+		return useUserInformationStore.setState(state => ({friendRequests:[...prev,data]}))
+	}
+	const handleStatusUpdated = (data) => {
+		const prev = useUserInformationStore.getState().friendRequests
+		useUserInformationStore.setState(state => ({status:data.status}))
+		console.log(useUserInformationStore.getState().status,"new status")
+
+	}
 	useEffect(() => {
 		if(!currentSocket) return;
-		console.log(currentSocket)
-		currentSocket.on("server:send-notification", (data) => {
-		console.log("you recived a new notification!",data)
-		const prev = useUserInformationStore.getState().userInfo.friendRequests
-		useUserInformationStore.setState(state => ({userInfo:{friendRequests:[...prev,data]}}))
-		console.log(useUserInformationStore.getState().userInfo.friendRequests,"new")
-		})
-		currentSocket.on("server:update-user", (data) => {
-			useNotificationsStore.setState(state => ({userInfo:data}))
-			console.log(useNotificationsStore.getState().userInfo,"new")
-
-		})
-		currentSocket.on('server:added-message',(data)=> {
-				useCurrentMessages.setState(state => ({newMessage:data}))
-		})
-		currentSocket.on("server:create-chat", (data) => {
-			console.log("created chat",data)
-			useNotificationsStore.setState(state => ({userInfo:{chats:[...state.userInfo.chats,data]}}))
-		})
+		currentSocket.on("server:send-notification", handleNotificationReceived)
+		currentSocket.on("server:status-updated",handleStatusUpdated)
+		return () => {
+			currentSocket.off("server:send-notification", handleNotificationReceived)
+			currentSocket.off("server:status-updated",handleStatusUpdated)
+		}
 	},[currentSocket])
 	return null
 }

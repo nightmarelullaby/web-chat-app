@@ -81,8 +81,8 @@ const verifyToken = async (req, res) => {
         }
         const authorId = req.user.id
         const userFound = await User.findById(user.id).populate("friendRequests",{}).populate("friends").populate({path:"chats",select:{messages:{"$slice":-1}},populate:{path:"users",model:"User"}})
+        console.log(userFound)
         if (!userFound) {
-            console.log(userFound)
             return res.sendStatus(401)}
 
         res.json(userFound);

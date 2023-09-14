@@ -1,20 +1,7 @@
 "use client";
-import {IconMoonFilled,IconLogout,IconCheck,IconPointFilled,IconMoon,IconSearch,IconPlus,IconMoodHappy,IconDots,IconBrandTelegram,IconPaperclip,IconUserPlus,IconBell,IconDotsVertical,IconLetterA,IconCommand} from '@tabler/icons-react';
-import Image from 'next/image'
-import {Button,Popover,
-  PopoverTrigger,
-  PopoverContent,
-  PopoverHeader,
-  PopoverBody,
-  PopoverFooter,
-  PopoverArrow,
-  PopoverCloseButton,
-  PopoverAnchor,Badge,InputGroup,InputLeftElement,InputRightElement,Grid,Box,GridItem,Input,VStack,HStack,Center,Text,Flex,Avatar,AvatarBadge} from "@/components/chakra-client/components"
-import { BellIcon } from '@heroicons/react/24/outline'
-import {useState,useRef,useEffect} from "react"
-import {socket} from "@/socket"
+import {IconPlus,IconMoodHappy,IconBrandTelegram,IconPaperclip} from '@tabler/icons-react';
+import {Button,InputGroup,Box,Input,HStack,Flex} from "@/components/chakra-client/components"
 import { Field, Form, Formik } from 'formik';
-import { useOutsideClick } from '@chakra-ui/react'
  import * as Yup from 'yup';
  const InputSchema = Yup.object().shape({
     input:Yup.string()
@@ -25,7 +12,6 @@ import { useOutsideClick } from '@chakra-ui/react'
 export const ChatInput = ({onSubmit}) =>{
   return <Flex borderTopColor="gray.300" borderWidth=".5px 0 0 0 " bg="gray.100" direction="column">
      <Formik 
-          // onChange={(values)=>console.log(values)}
           validationSchema={InputSchema}
           initialValues={{input:''}}
           onSubmit={(values,actions)=>onSubmit(values,actions)}

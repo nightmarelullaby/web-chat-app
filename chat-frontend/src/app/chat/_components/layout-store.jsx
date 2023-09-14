@@ -4,7 +4,6 @@ import { UpperBar } from './upper-bar';
 import {IconFriends} from '@tabler/icons-react';
 import { Sidebar } from './sidebar';
 import {useRouter} from "next/navigation"
-import { ChatContainer } from './chat-container';
 import Link from "next/link"
 import SearchbarFetch from './searchbar-with-fetch'
 import {FriendsList} from "./friend-list"
@@ -15,9 +14,10 @@ import {useSocketStore} from "@/store/useSocketStore"
 import {useUserInformationStore} from "@/store/useUserInformationStore"
 export default function LayoutStore({children}){
     const {currentSocket} = useSocketStore()
-	const {userInfo} = useUserInformationStore()
-    const chats = userInfo.chats.map((chat,index) => {
-        let [users] = chat.users.filter(i => i._id !== userInfo._id)
+	const {status,_id,chats,username} = useUserInformationStore()
+    console.log(useUserInformationStore.getState())
+    const chatsFiltered = chats?.map((chat,index) => {
+        let [users] = chat?.users?.filter(i => i._id !== _id)
         if(!users) return {
             lastMessage:{content:"",date:""},
             id:chat._id,
@@ -29,25 +29,24 @@ export default function LayoutStore({children}){
             username:users.username,
          }
     })
-    const router = useRouter()
 	return     <Grid height="100%" gridTemplateRows="auto 1fr" templateAreas={`"header header header header header header header"
     "sidebar main main main main main main"
     "sidebar main main main main main main"`}>
 <GridItem bg="gray.50" position="relative" zIndex="9999999" borderBottomColor="gray.200" borderWidth="0 0 .5px 0" py="4" area={'header'} px="4">
 <UpperBar  >
     <NotificationsWrapper />
-    <UserDropdown status={userInfo.status} 
+    <UserDropdown status={status} 
     onClickActive={()=>{
-        let obj = {id:userInfo._id,status:"Active"}
+        let obj = {id:_id,status:"Active"}
         return currentSocket.emit("client:update-status",obj)
     }}
     onClickDisconnected={()=>{
-        let obj = {id:userInfo._id,status:"Disconnected"}
+        let obj = {id:_id,status:"Disconnected"}
         return currentSocket.emit("client:update-status",obj)
     }}
     onClickIdle={()=>{
-        let obj = {id:userInfo._id,status:"Idle"}
-        return currentSocket.emit("client:update-status",obj)}} username={userInfo?.username}/>
+        let obj = {id:_id,status:"Idle"}
+        return currentSocket.emit("client:update-status",obj)}} username={username}/>
 </UpperBar>
 </GridItem>
 
@@ -66,7 +65,7 @@ export default function LayoutStore({children}){
     </Link>
     <Divider mt="2"/>
     <Text as="h4" fontFamily="system-ui" fontSize="16px" color="gray.500"fontWeight="400">Chats</Text> 
-    <FriendsList data={chats}/>    
+    <FriendsList data={chatsFiltered}/>    
 </Sidebar>
 </GridItem>
 

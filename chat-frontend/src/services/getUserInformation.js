@@ -8,7 +8,7 @@ export const getUserInformation = async (data) => {
 		"Cookie":`token=${value}`,
  		"Content-Type": "application/json"
 	}
-let response = await fetch("https://chat-backend-r4ns.onrender.com/api/auth/verify", { 
+let response = await fetch(process.env.LOCAL_BACKEND+ "/api/auth/verify", { 
   method: "GET",
   headers: headersList
 },{cache:"no-store"});

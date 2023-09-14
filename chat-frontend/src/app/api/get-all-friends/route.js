@@ -13,7 +13,7 @@ export async function GET(req,res){
 	 	"Content-Type": "application/json"
 	}
 
-	let response = await fetch("https://chat-backend-r4ns.onrender.com/api/getAllFriends?q="+q, { 
+	let response = await fetch(process.env.LOCAL_BACKEND+"/api/getAllFriends?q="+q, { 
 	  method: "GET",
 	  headers: headersList
 	});

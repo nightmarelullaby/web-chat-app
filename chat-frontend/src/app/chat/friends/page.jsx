@@ -24,7 +24,7 @@ export default function FriendsPage(){
 			    	fontSize="13px"
 			    	letterSpacing=".5px"
 			    	fontFamily="system-ui" 
-			    	borderColor="transparent" border="none" borderColor="gray.100">
+			    	border="none" borderColor="gray.100">
 			    	All
 			    </Tab>
 			    <Tab 
@@ -40,13 +40,13 @@ export default function FriendsPage(){
 			    	color="gray.700" 
 			    	fontWeight="500" 
 			    	fontFamily="system-ui" 
-			    	borderColor="transparent" border="none" borderColor="gray.100">Connected</Tab>
+			    	border="none" borderColor="gray.100">Connected</Tab>
 			  </TabList>
 			
 			  <TabPanels mt="2">
 			    <TabPanel p="0">
 			    
-			    <FriendsList data={useUserInformationStore.getState().userInfo.friends}/>
+			    <FriendsList data={useUserInformationStore.getState().friends}/>
 			    </TabPanel>
 			    <TabPanel>
 			      <p>two!</p>

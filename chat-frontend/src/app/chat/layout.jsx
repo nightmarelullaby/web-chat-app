@@ -9,16 +9,16 @@ const DynamicSocketInitializer = dynamic(() => import("./_components/socket-init
 })
 
 import LayoutChatEvents from "./_components/layout-chat-events"
-const URL = "https://chat-backend-r4ns.onrender.com"
+const URL = process.env.NEXT_PUBLIC_LOCAL_BACKEND
+
 
 export default async function ChatLayout({children}){
     const promise = await getUserInformation()
-    useUserInformationStore.setState({userInfo:promise})
-    // return console.log(useUserInformationStore.getState().userInfo)
+    useUserInformationStore.setState({promise})
 
     return <>
         <LayoutChatEvents/>
-        <DynamicSocketInitializer URL={URL} userId={useUserInformationStore.getState().userInfo._id} />
+        <DynamicSocketInitializer URL={URL} userId={useUserInformationStore.getState()._id} />
         <UserInformationInitializer promise={promise}/>
         <LayoutStore>
             {children}

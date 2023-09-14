@@ -1,10 +1,16 @@
 export const sendFriendRequest = async (id) => {
 	let bodyContent = {id}
 	
-let response = await fetch("/api/send-friend-request", { 
-  method: "POST",
-  body:JSON.stringify(bodyContent),
-});
+	let response = await fetch("/api/send-friend-request", { 
+  	method: "POST",
+  	body:JSON.stringify(bodyContent),
+	});
+
+	const json = await response.json()
+	console.log(json)
+	return json
+	
+
 
 }
 

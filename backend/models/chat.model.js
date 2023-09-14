@@ -24,7 +24,9 @@ const chatSchema = new Schema({
             ref: "User"
         }],
     },
-    messages:[messageSchema],
+    messages:{
+        type:Array,
+        default:[]},
 }, { timestamps: true })
 const Chat = model('Chat', chatSchema)
 const Message =  model('Message', messageSchema)

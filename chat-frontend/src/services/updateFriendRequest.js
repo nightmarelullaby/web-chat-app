@@ -1,29 +1,14 @@
 export const updateFriendRequest = async (status,friendRequestId,toUserId) => {
-	// return console.log(status,friendRequestId,toUserId)
-	let headersList = {
- 		"Accept": "*/*",
- 		"Content-Type": "application/json",
-	}
 	let bodyContent = {
-		status:status,
-		friendRequestId:friendRequestId,
-		toUser:{
-			id:toUserId
-		}
+		status,
+		friendRequestId,
+		toUserId
 	}
 	
-let response = await fetch("https://chat-backend-r4ns.onrender.com/api/updateFriendRequestStatus", { 
+let response = await fetch("/api/update-friend-request", { 
   method: "PUT",
-  headers: headersList,
   body:JSON.stringify(bodyContent),
-  credentials: 'include', 
-},{cache:"no-store"});
-
-if(response.status !== 200){
-		const {message} = await response.json()
-		console.log("error",message)
-		throw new Error("error!",message)
-	}	
+});
 	const responseParsed = await response.json()
 	return responseParsed
 }

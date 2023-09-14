@@ -14,10 +14,10 @@ export default (io) => {
                 content:data.content,
                 authorId:data.authorId,
             })
-            const chatFound = await Chat.findByIdAndUpdate(data.chatId,{"$push":{messages:newMessage}},{new:true})
+            const messageAdded = await newMessage.save()
+            const chatFound = await Chat.findByIdAndUpdate(data.chatId,{"$push":{messages:messageAdded}},{new:true})
             const chats = await Chat.findById(data.chatId).populate("users")
-
-            io.to(data.chatId.toString()).emit("server:added-message",chats);
+            return io.to(data.chatId.toString()).emit("server:added-message",chats);
         })
 
         socket.on('client:join-chat', async (data) => {
@@ -25,11 +25,11 @@ export default (io) => {
             socket.join(room)
         })
     	socket.on("client:update-status",async(data) => {
-        const userId = data.id
-        const status = data.status
-        const statusUpdated = await User.findByIdAndUpdate(userId,{"$set":{status:status}},{new:true}).populate("friendRequests",{}).populate("friends").populate({path:"chats",populate:{path:"users",model:"User"}})
-        if(!statusUpdated) return res.status(401).json({message:"User not found"})
-        socket.emit("server:status-updated",statusUpdated)
+            const userId = data.id
+            const status = data.status
+            const statusUpdated = await User.findByIdAndUpdate(userId,{"$set":{status:status}},{new:true})
+            if(!statusUpdated) return;            
+            socket.emit("server:status-updated",statusUpdated)
         })
 
 		socket.on("client:send-message", (data) => {

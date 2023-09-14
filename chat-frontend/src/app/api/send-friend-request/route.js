@@ -19,22 +19,21 @@ export async function POST (req,res){
 		toUser:{id:body.id}
 	}
 	
-let response = await fetch("https://chat-backend-r4ns.onrender.com/api/sendFriendRequest", { 
+let response = await fetch(process.env.LOCAL_BACKEND + "/api/sendFriendRequest", { 
   method: "POST",
   headers: headersList,
   body:JSON.stringify(bodyContent),
 });
 
-if(response.status !== 200){
+	if(response.status !== 200){
 		const {message} = await response.json()
-		console.log("error",message)
-		throw new Error("error!",message)
+		return NextResponse.json(message,{status:400})
 	}	
 	const responseParsed = await response.json()
-	return responseParsed
+	return NextResponse.json(responseParsed)
 	}	
 	catch(error){
-	console.log(error)	
+		return NextResponse.json({message:error.message},{status:500})
 	
 }
 

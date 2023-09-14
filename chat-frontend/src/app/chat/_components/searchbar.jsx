@@ -1,19 +1,8 @@
 "use client";
-import {IconMoonFilled,IconLogout,IconCheck,IconPointFilled,IconMoon,IconSearch,IconPlus,IconMoodHappy,IconDots,IconBrandTelegram,IconPaperclip,IconUserPlus,IconBell,IconDotsVertical,IconLetterA,IconCommand} from '@tabler/icons-react';
-import Image from 'next/image'
-import {Button,Popover,
-  PopoverTrigger,
-  Skeleton, SkeletonCircle,
-  PopoverContent,
-  PopoverHeader,
-  PopoverBody,
-  PopoverFooter,
-  PopoverArrow,
-  PopoverCloseButton,
-  PopoverAnchor,Badge,InputGroup,InputLeftElement,InputRightElement,Grid,Box,GridItem,Input,VStack,HStack,Center,Text,Flex,Avatar,AvatarBadge} from "@/components/chakra-client/components"
-import { BellIcon } from '@heroicons/react/24/outline'
+import {IconSearch,IconUserPlus,IconDotsVertical,IconLetterA,IconCommand} from '@tabler/icons-react';
+import {Button,
+  Skeleton, SkeletonCircle,InputGroup,InputLeftElement,InputRightElement,Grid,Box,GridItem,Input,VStack,HStack,Center,Text,Flex,Avatar,AvatarBadge} from "@/components/chakra-client/components"
 import {useState,useRef,useEffect} from "react"
-import {socket} from "@/socket"
 import { useOutsideClick } from '@chakra-ui/react'
 
 export const Searchbar = ({isLoading=false,onAddFriend=()=>null,onChangeValue=()=>null,data=[]}) =>{

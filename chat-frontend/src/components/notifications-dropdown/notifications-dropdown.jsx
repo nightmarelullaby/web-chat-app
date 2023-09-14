@@ -21,6 +21,7 @@ import { useOutsideClick } from '@chakra-ui/react'
 import UserDropdown from "@/components/user-dropdown/user-dropdown"
 
 export function NotificationElement({onAccept,onDeny,type="",from="test",date="22-22-2010",friendRequestId}){
+    const [isSending,setIsSending] = useState(false)
     return <ListItem listStyleType="none" p="0">
     <Button w="100%" borderRadius="0" justifyContent="start" h="min-content" _hover={{bg:"gray.100"}} bg="transparent" p="2">
     <HStack>
@@ -31,7 +32,11 @@ export function NotificationElement({onAccept,onDeny,type="",from="test",date="2
       <Text as="small" fontWeight="300" fontSize="10px">{date}</Text>
       </VStack>
       <HStack>
-      <Button onClick={onAccept} variant="icon-outline" >
+      <Button isDisabled={isSending} onClick={async ()=>{
+        setIsSending(true)
+        await onAccept()
+        return setIsSending(false)
+      }} variant="icon-outline" >
         <IconCheck 
           size={16} 
           color="#2d3748"
@@ -40,7 +45,11 @@ export function NotificationElement({onAccept,onDeny,type="",from="test",date="2
         />
         <Text as="span" fontSize="12px" fontFamily="system-ui">Accept</Text>
       </Button>
-      <Button onClick={onDeny}variant="icon-outline">
+      <Button isDisabled={isSending} onClick={async ()=>{
+        setIsSending(true)
+        await onDeny()
+        return setIsSending(false)
+      }}variant="icon-outline">
       <IconX 
           size={16} 
           color="#2d3748"

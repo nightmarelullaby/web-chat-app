@@ -25,6 +25,7 @@ const userSchema = new Schema({
         ref: "User"
     }],
     status:{
+        // default:"Active",
         type:String,
     },
     chats: [{

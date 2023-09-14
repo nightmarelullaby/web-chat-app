@@ -8,7 +8,7 @@ export const getChatById = async (id) => {
  		"Content-Type": "application/json",
 	}
 	
-let response = await fetch("https://chat-backend-r4ns.onrender.com/api/getChatById/"+id, { 
+let response = await fetch(process.env.LOCAL_BACKEND+"/api/getChatById/"+id, { 
   method: "GET",
   headers: headersList,
 },{cache:"no-store"});

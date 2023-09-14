@@ -1,6 +1,7 @@
 import friendRequest from "../models/friendRequest.model.js"
 import User from "../models/user.model.js"
 import { Types } from "mongoose"
+import Chat,{Message} from "../models/chat.model.js"
 
 const sendFriendRequest = async (req, res) => {
     try {
@@ -10,6 +11,7 @@ const sendFriendRequest = async (req, res) => {
         if (toUser.id === fromUserId) return res.status(500).json({ message: "You cant send friend request yourself" })
         const fromUserData = await User.findById(fromUserId)
         const toUserData = await User.findById(toUser.id)
+        if(fromUserData.friends.includes(toUserData._id)) return res.status(400).json({ message: "Friend already added" })
 
         if (!fromUserData || !toUserData) return res.status(404).json({ message: "User not found" })
 
@@ -28,7 +30,7 @@ const sendFriendRequest = async (req, res) => {
         toUserData.friendRequests.push({ _id: newFriendRequest._id })
 
         const friendRequestSend = await newFriendRequest.save()
-        console.log(friendRequestSend)
+
         await toUserData.save()
         await fromUserData.save()
         return res.json(friendRequestSend)
@@ -70,7 +72,6 @@ const updateFriendRequestStatus = async (req, res) => {
             })
             const authorData = await User.findById(authorId)
 
-            console.log(toUserData, authorRemoved)
             if (!authorData || !toUserData) return res.status(400).json({ message: "User not found" })
 
             return res.json({ toUserData, authorData, deletedRequest })
@@ -79,18 +80,22 @@ const updateFriendRequestStatus = async (req, res) => {
         if (status === "accept") {
             const deletedRequest = await friendRequest.findByIdAndRemove(friendRequestId);
             if(!deletedRequest) return res.status(400).json({message:"not found!"});
+            const newChat = new Chat({
+                    users: [new Types.ObjectId(authorId), new Types.ObjectId(toUser.id)],
+                    messages: []
+            })
+            const chatSaved = await newChat.save()
+            console.log(chatSaved)
 
             const toUserData = await User.findByIdAndUpdate(toUser.id, {
-                "$push": { friends: authorId },
+                "$push": { friends: authorId,chats: chatSaved._id },
                 "$pull": { friendRequests: new Types.ObjectId(friendRequestId) }
             });
 
             const addedToAuthor = await User.findByIdAndUpdate(authorId, {
-                "$push": { friends: toUser.id },
+                "$push": { friends: toUser.id,chats: chatSaved._id  },
                 "$pull": { friendRequests: new Types.ObjectId(friendRequestId) }
             });
-
-            console.log(toUserData)
 
             if (!authorData || !toUserData) return res.status(400).json({ message: "User not found" })
                 
