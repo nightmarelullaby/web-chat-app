@@ -5,9 +5,7 @@ import {updateFriendRequest} from "@/services/updateFriendRequest"
 import {useUserInformationStore} from "@/store/useUserInformationStore"
 import {UnorderedList,Divider} from "@/components/chakra-client/components"
 export default function NotificationsWrapper(){
-	const {friendRequests,_id} = useUserInformationStore()
-	// const [notifications,setNotifications] = useState(friendRequests.map(not => {
-	// 	return {_id:not._id,from:{username:not.from.username},date:not.date} }))
+	const {username,friendRequests,_id} = useUserInformationStore()
 	const notificationsLength = friendRequests?.length
 	return <NotificationsDropdown 
 		bg="white" 
@@ -16,7 +14,7 @@ export default function NotificationsWrapper(){
 		_hover={{bg:"gray.100"}}>
 		<UnorderedList  m="0">
         {friendRequests.map((notification,index) => <>
-          <NotificationElement 
+        	{!notification.from.username === username && <NotificationElement 
           		onAccept={async ()=> { 
           			try{
           				await updateFriendRequest("accept",notification._id,notification.from.id)
@@ -37,7 +35,8 @@ export default function NotificationsWrapper(){
               id={notification._id} 
               type="friendRequest" 
               from={notification.from.username} 
-              date={notification.date}/>
+              date={notification.date}/>}
+
           {index !== friendRequests.length && <Divider />}
           </>)}
       		</UnorderedList>
