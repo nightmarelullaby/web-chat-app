@@ -1,5 +1,5 @@
 "use client";
-import {useState} from "react"
+import {useState,useEffect} from "react"
 import NotificationsDropdown,{NotificationElement} from "@/components/notifications-dropdown/notifications-dropdown.jsx"
 import {updateFriendRequest} from "@/services/updateFriendRequest"
 import {useUserInformationStore} from "@/store/useUserInformationStore"
@@ -8,7 +8,9 @@ export default function NotificationsWrapper(){
 	const {username,friendRequests,_id} = useUserInformationStore()
 	const [friendRequestsFiltered,setFriendRequestsFiltered] = useState(friendRequests.filter(notification => notification.from.username !== username))
 	const notificationsLength = friendRequestsFiltered.length
-	
+	useEffect(()=>{
+		setFriendRequestsFiltered(friendRequests.filter(notification => notification.from.username !== username))
+	},[friendRequests])
 
 	return <NotificationsDropdown 
 		bg="white" 
