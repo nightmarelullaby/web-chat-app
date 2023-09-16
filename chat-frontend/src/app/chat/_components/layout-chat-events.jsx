@@ -8,8 +8,7 @@ export default function LayoutChatEvents(){
 
 	const handleNotificationReceived = (data) => {
 		console.log("new notification")
-		const prev = useUserInformationStore.getState().friendRequests
-		return useUserInformationStore.setState({friendRequests:[...prev,data]})
+		return useUserInformationStore.setState({friendRequests:[data]})
 	}
 
 	const handleStatusUpdated = (data) => {
