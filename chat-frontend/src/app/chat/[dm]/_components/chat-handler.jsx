@@ -31,10 +31,15 @@ export default function ChatHandler({response,id}){
 			}
 	},[currentSocket])
 
-	const handleSubmit = (values,actions) => {
+	const handleSubmit = (values,actions,images) => {
 		const {input} = values
 		if(input === "") return;
-		let bodyContent = {authorId:_id,content:input,chatId:response._id}
+		let bodyContent = {
+			authorId:_id,
+			content:input,
+			chatId:response._id,
+			images:images
+		}
 		currentSocket.emit("client:add-message",bodyContent)
 		return actions.resetForm()
 	}
@@ -42,8 +47,9 @@ export default function ChatHandler({response,id}){
 	return 		  <>  <Flex height="100%" direction="column">
       <ChatContainerHeader status={headerUserStatus} title={headerUserTitle} />
       <Flex ref={ref} direction="column" height="100%" p="4" gap="4" bg="white" mt="auto" overflowY="scroll">
-        {Array.isArray(currentMessages) && currentMessages.map(message => <ChatMessage sender={message.authorId === _id ? true: false} content={message.content} date={moment(message.date).calendar()} author={message.authorId.username}/>)}
+        {Array.isArray(currentMessages) && currentMessages.map(message => <ChatMessage images={message.images} sender={message.authorId === _id ? true: false} content={message.content} date={moment(message.date).calendar()} author={message.authorId.username}/>)}
       </Flex>
+
        <ChatInput onSubmit={handleSubmit}/>
       </Flex>
    </>

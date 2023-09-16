@@ -10,6 +10,8 @@
   },
   "dependencies": {
     "@chakra-ui/react": "^2.8.0",
+    "@emoji-mart/data": "^1.1.2",
+    "@emoji-mart/react": "^1.1.1",
     "@heroicons/react": "^2.0.18",
     "@tabler/icons": "^2.30.0",
     "@tabler/icons-react": "^2.30.0",

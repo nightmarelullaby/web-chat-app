@@ -4,6 +4,9 @@ const messageSchema = new Schema({
     content:{
         type:String,
     },
+    images:{
+        type:Array
+    },
     authorId:{
         type:Schema.Types.ObjectId,
         ref:"user",
