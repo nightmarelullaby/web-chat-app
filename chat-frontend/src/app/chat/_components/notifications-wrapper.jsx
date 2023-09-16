@@ -9,6 +9,7 @@ export default function NotificationsWrapper(){
 	const [friendRequestsFiltered,setFriendRequestsFiltered] = useState(friendRequests.filter(notification => notification.from.username !== username))
 	const notificationsLength = friendRequestsFiltered.length
 	useEffect(()=>{
+		console.log(friendRequests)
 		setFriendRequestsFiltered(friendRequests.filter(notification => notification.from.username !== username))
 	},[friendRequests])
 
@@ -23,7 +24,7 @@ export default function NotificationsWrapper(){
           		onAccept={async ()=> { 
           			try{
           				await updateFriendRequest("accept",notification._id,notification.from.id)
-          				return setFriendRequestsFiltered(prev => prev.filter(not => notification._id !== not._id))
+          				return setFriendRequestsFiltered(friendRequestsFiltered.filter(not => notification._id !== not._id))
           			}	
           			catch(error){
           				return;
@@ -31,7 +32,7 @@ export default function NotificationsWrapper(){
           		onDeny={async ()=> { 
           			try{
           				await updateFriendRequest("deny",notification._id,notification.from.id)
-          				return setFriendRequestsFiltered(prev => prev.filter(not => notification._id !== not._id))
+          				return setFriendRequestsFiltered(friendRequestsFiltered.filter(not => notification._id !== not._id))
           			}	
           			catch(error){
           				return;
