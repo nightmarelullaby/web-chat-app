@@ -18,7 +18,7 @@ export default async function ChatLayout({children}){
 
     return <>
         <LayoutChatEvents/>
-        <DynamicSocketInitializer URL={URL} userId={useUserInformationStore.getState()._id} />
+        <DynamicSocketInitializer URL={URL} userId={promise._id} />
         <UserInformationInitializer promise={promise}/>
         <LayoutStore>
             {children}
