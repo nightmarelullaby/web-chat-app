@@ -24,7 +24,7 @@ export const ChatInput = ({onSubmit,onClickEmoji}) =>{
   return <Flex borderTopColor="gray.300" borderWidth=".5px 0 0 0 " bg="gray.100" direction="column">
      <Formik 
           validationSchema={InputSchema}
-          initialValues={{input:'',image:''}}
+          initialValues={{input:'',images:[]}}
           onSubmit={(values,actions)=>onSubmit(values,actions,images)}
         >
          {({values,handleSubmit,setFieldValue}) => (
@@ -41,7 +41,7 @@ export const ChatInput = ({onSubmit,onClickEmoji}) =>{
                   </>
               )}
             </HStack>
-            <Field name="image" >
+            <Field name="images" >
               {({ field, form}) => (
                 <Input 
                 visibility="hidden"
@@ -62,6 +62,7 @@ export const ChatInput = ({onSubmit,onClickEmoji}) =>{
                   setImageLoading(true)
                   const image = await convertToBase64(e.target.files[0])
                   if(images.includes(image)) return setImageLoading(false)
+                  form.setFieldValue("images",[values.images,image])
                   setImages(prev => prev.concat(image))
                   return setImageLoading(false)
                 }}/>)}
