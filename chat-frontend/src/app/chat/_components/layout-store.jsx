@@ -44,9 +44,10 @@ export default function LayoutStore({children}){
         let obj = {id:_id,status:"Disconnected"}
         return currentSocket.emit("client:update-status",obj)
     }}
-    onClickIdle={()=>{
-        let obj = {id:_id,status:"Idle"}
-        return currentSocket.emit("client:update-status",obj)}} username={username}/>
+    // onClickIdle={()=>{
+    //     let obj = {id:_id,status:"Idle"}
+    //     return currentSocket.emit("client:update-status",obj)}} 
+        username={username}/>
 </UpperBar>
 </GridItem>
 
