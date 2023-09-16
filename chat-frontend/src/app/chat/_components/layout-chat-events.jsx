@@ -10,9 +10,10 @@ export default function LayoutChatEvents(){
 		const prev = useUserInformationStore.getState().friendRequests
 		return useUserInformationStore.setState(state => ({friendRequests:[...prev,data]}))
 	}
+	
 	const handleStatusUpdated = (data) => {
 		const prev = useUserInformationStore.getState().friendRequests
-		useUserInformationStore.setState(state => ({status:data.status}))
+		return useUserInformationStore.setState(state => ({status:data.status}))
 		console.log(useUserInformationStore.getState().status,"new status")
 
 	}

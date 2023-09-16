@@ -1,11 +1,11 @@
 import Image from 'next/image'
-import {Box,Center,HStack,VStack,Button,Text,Input,FormControl, FormLabel,InputGroup,InputRightElement} from "@/components/chakra-client/components"
+import {Flex,Box,Center,HStack,VStack,Button,Text,Input,FormControl, FormLabel,InputGroup,InputRightElement} from "@/components/chakra-client/components"
 import LoginForm from "./components/LoginForm"
 import Link from "next/link" 
 const Login = () => {
   return (
-    <Box bg="gray.50" h="100vh">
-      <VStack alignItems="stretch" maxW="700px" h="100%" justifyContent="center" bg="white" p="4" transition="0s" borderWidth="1px" borderRadius="6px" >
+    <Flex bg="gray.50" h="100vh" justifyContent="center">
+      <VStack alignItems="stretch" minW={[200,500]} maxW="700px" h="100%" justifyContent="center" bg="white" p="4" transition="0s" borderWidth="1px" borderRadius="6px" >
       <VStack alignItems="start" ml="4" gap="0">
         <Text fontFamily="system-ui" as="h4" color="gray.700" fontSize="3xl" fontWeight="700">
           Log in
@@ -14,7 +14,7 @@ const Login = () => {
           Enter your data to access
         </Text>
       </VStack>
-      <Box w="100%" mt="4">
+      <Box w="100%" mt="4" >
         <LoginForm />
             <HStack ml="4" mt="2">
               <Text as="p" fontSize="sm">Dont have an account?</Text>
@@ -26,7 +26,7 @@ const Login = () => {
           </HStack>
       </Box>
       </VStack>
-    </Box>
+    </Flex>
   )
 }
 
