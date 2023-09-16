@@ -6,7 +6,7 @@ import {useUserInformationStore} from "@/store/useUserInformationStore"
 import {UnorderedList,Divider} from "@/components/chakra-client/components"
 export default function NotificationsWrapper(){
 	const {friendRequests,_id} = useUserInformationStore()
-	const [notifications,setNotifications] = useState(friendRequests?.filter(not => not.from.id !== _id))
+	const [notifications,setNotifications] = useState(friendRequests?.filter(not => not.from._id !== _id))
 	const notificationsLength = notifications?.length
 	return <NotificationsDropdown 
 		bg="white" 

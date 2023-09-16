@@ -57,8 +57,10 @@ friendRequest.watch()
         try{
             const userThatWillBeNotified = data.fullDocument.to.id.toString()
             const allSockets = await io.fetchSockets()
+            console.log(allSockets,"here all sockets")
             const [socketFiltered] = allSockets.filter(socket => socket.handshake.auth.mongoId === userThatWillBeNotified)
             const socketFilteredId = socketFiltered.id
+            console.log(socketFilteredId,"filtered socket id")
             
             return io.to(socketFilteredId).emit("server:send-notification",data.fullDocument);
             console.log("sended",data.fullDocument)

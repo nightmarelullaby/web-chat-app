@@ -3,8 +3,12 @@ import {Searchbar} from "./searchbar"
 import {getAllFriendsUsers} from "@/services/getAllFriendsUsers"
 import {useState,useEffect} from "react"
 import {sendFriendRequest} from "@/services/sendFriendRequest"
+import {useSocketStore} from "@/store/useSocketStore"
+import {useUserInformationStore} from "@/store/useUserInformationStore"
+
 function useDebounce(input,delay){
 	const [debouncedValue,setDebouncedValue] = useState(input)
+	const {currentSocket} = useSocketStore()
 	useEffect(() => {
 		const timer = setTimeout(() => { setDebouncedValue(input) },delay)
 		return ()=> clearTimeout(timer)
@@ -12,6 +16,9 @@ function useDebounce(input,delay){
 
 	return [debouncedValue]
 }
+// function sendFriendRequest (id,ownId){
+// 	return currentSocket.emit("client:send-notification",{toUser:{id},fromUserId:ownId})
+// }
 export default function SearchbarFetch(){
 	const [SearchbarValue,setSearcbarValue] = useState("")
 	const [debouncedValue] =  useDebounce(SearchbarValue,200)
@@ -27,5 +34,8 @@ export default function SearchbarFetch(){
 		})()
 	},[debouncedValue])
 	
-	return <Searchbar onAddFriend={(id)=>sendFriendRequest(id)} data={results} isLoading={loading} onChangeValue={(val)=>setSearcbarValue(val)}/>
+	return <Searchbar 
+	// onAddFriend={(id)=>sendFriendRequest(id,useUserInformationStore.getState()._id)}
+	onAddFriend={(id)=>sendFriendRequest(id)} 
+	data={results} isLoading={loading} onChangeValue={(val)=>setSearcbarValue(val)}/>
 }
