@@ -7,14 +7,14 @@ export default function LayoutChatEvents(){
 	const {currentSocket} = useSocketStore()
 
 	const handleNotificationReceived = (data) => {
+		console.log("new notification")
 		const prev = useUserInformationStore.getState().friendRequests
-		return useUserInformationStore.setState(state => ({friendRequests:[...prev,data]}))
+		return useUserInformationStore.setState({friendRequests:[...prev,data]})
 	}
-	
+
 	const handleStatusUpdated = (data) => {
 		const prev = useUserInformationStore.getState().friendRequests
 		return useUserInformationStore.setState(state => ({status:data.status}))
-		console.log(useUserInformationStore.getState().status,"new status")
 
 	}
 	useEffect(() => {
