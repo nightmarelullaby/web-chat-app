@@ -13,6 +13,7 @@ export default (io) => {
             const newMessage = new Message({
                 content:data.content,
                 authorId:data.authorId,
+                images:data.images
             })
             const messageAdded = await newMessage.save()
             const chatFound = await Chat.findByIdAndUpdate(data.chatId,{"$push":{messages:messageAdded}},{new:true})
