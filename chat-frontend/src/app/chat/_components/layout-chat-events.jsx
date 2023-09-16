@@ -18,6 +18,7 @@ export default function LayoutChatEvents(){
 
 	}
 	useEffect(() => {
+		console.log(currentSocket)
 		if(!currentSocket) return;
 		currentSocket.on("server:send-notification", handleNotificationReceived)
 		currentSocket.on("server:status-updated",handleStatusUpdated)

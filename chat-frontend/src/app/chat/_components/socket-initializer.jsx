@@ -11,10 +11,14 @@ export default function SocketInitializer({userId,URL}){
     useEffect(() =>{
         if(!socket) return
         useSocketStore.setState({currentSocket:socket})
+        console.log(currentSocket)
     },[socket])
 
     useEffect(() =>{
         if(!currentSocket) return
+        return () => {
+            currentSocket?.disconnect()
+        }
     },[isConnected])
     return null
 }    
