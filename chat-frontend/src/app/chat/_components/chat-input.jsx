@@ -22,7 +22,7 @@ export const ChatInput = ({onSubmit}) =>{
           <Field name="input" >
             {({ field, form}) => (
               <InputGroup> 
-   <Input _hover={{borderColor:"transparent"}} fontFamily="system-ui" borderColor="transparent" _focus={{boxShadow:"none",borderColor:"transparent"}} _placeholder={{fontSize:14}} type="text" placeholder="Send message to" {...field}/>
+   <Input autocomplete="off" _hover={{borderColor:"transparent"}} fontFamily="system-ui" borderColor="transparent" _focus={{boxShadow:"none",borderColor:"transparent"}} _placeholder={{fontSize:14}} type="text" placeholder="Send message to" {...field}/>
    </InputGroup>
    )}
   
