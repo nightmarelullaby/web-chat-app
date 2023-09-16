@@ -6,16 +6,16 @@ import {useUserInformationStore} from "@/store/useUserInformationStore"
 import {UnorderedList,Divider} from "@/components/chakra-client/components"
 export default function NotificationsWrapper(){
 	const {friendRequests,_id} = useUserInformationStore()
-	const [notifications,setNotifications] = useState(friendRequests.map(not => {
-		return {_id:not._id,from:{username:not.from.username},date:not.date} }))
-	const notificationsLength = notifications?.length
+	// const [notifications,setNotifications] = useState(friendRequests.map(not => {
+	// 	return {_id:not._id,from:{username:not.from.username},date:not.date} }))
+	const notificationsLength = friendRequests?.length
 	return <NotificationsDropdown 
 		bg="white" 
 		notificationsLength={notificationsLength}
 		ml="auto" 
 		_hover={{bg:"gray.100"}}>
 		<UnorderedList  m="0">
-        {notifications?.map((notification,index) => <>
+        {friendRequests.map((notification,index) => <>
           <NotificationElement 
           		onAccept={async ()=> { 
           			try{
