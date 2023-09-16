@@ -25,7 +25,10 @@ export const ChatInput = ({onSubmit,onClickEmoji}) =>{
      <Formik 
           validationSchema={InputSchema}
           initialValues={{input:'',images:[]}}
-          onSubmit={(values,actions)=>onSubmit(values,actions,images)}
+          onSubmit={(values,actions)=>{
+            onSubmit(values,actions,images)
+            return setImages([])
+          }}
         >
          {({values,handleSubmit,setFieldValue}) => (
 

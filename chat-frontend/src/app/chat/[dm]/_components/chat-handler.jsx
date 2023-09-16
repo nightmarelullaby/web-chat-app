@@ -40,7 +40,6 @@ export default function ChatHandler({response,id}){
 			chatId:response._id,
 			images:images
 		}
-		return;
 		currentSocket.emit("client:add-message",bodyContent)
 		return actions.resetForm()
 	}
