@@ -11,7 +11,7 @@ const sendFriendRequest = async (req, res) => {
         if (toUser.id === fromUserId) return res.status(500).json({ message: "You cant send friend request yourself" })
         const fromUserData = await User.findById(fromUserId)
         const toUserData = await User.findById(toUser.id)
-        if(fromUserData.friends.includes(toUserData._id)) return res.status(400).json({ message: "Friend already added" })
+        if(fromUserData.friends.includes(new Types.ObjectId(toUserData._id))) return res.status(400).json({ message: "Friend already added" })
 
         if (!fromUserData || !toUserData) return res.status(404).json({ message: "User not found" })
 
