@@ -18,8 +18,8 @@ export default function ChatHandler({response,id}){
 	const headerUserTitle = response.users.filter(user => user.username !== friendRequests)[0].username
 	const headerUserStatus = response.users.filter(user => user.username !== username)[0].status
 
-	const handleAddMessages = (data) => {
-			return setCurrentMessages(data.messages)
+	const handleAddMessages = (newMessage) => {
+			return setCurrentMessages(prev => [...prev,newMessage])
 	}
 	useEffect(() => {
 		if(!currentSocket) return

@@ -15,11 +15,9 @@ export default (io) => {
                 authorId:data.authorId,
                 images:data.images
             })
-            return io.to(data.chatId.toString()).emit("server:added-message",newMessage);
+            io.to(data.chatId.toString()).emit("server:added-message",newMessage);
             const messageAdded = await newMessage.save()
-            const chatFound = await Chat.findByIdAndUpdate(data.chatId,{"$push":{messages:messageAdded}},{new:true})
-            const chats = await Chat.findById(data.chatId).populate({path:"users",model:"User",}).populate({path:"messages",populate:{path:"authorId",model:"User"}})
-            return io.to(data.chatId.toString()).emit("server:added-message",chats);
+            return const chatFound = await Chat.findByIdAndUpdate(data.chatId,{"$push":{messages:messageAdded}},{new:true})
         })
 
         socket.on('client:join-chat', async (data) => {
