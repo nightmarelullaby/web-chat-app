@@ -1,7 +1,7 @@
 import { Router } from "express"
 import { MONGODB_URI } from "../config.js";
 import crypto from 'crypto';
-import GridFsStorage from 'multer-gridfs-storage';
+import {GridFsStorage} from 'multer-gridfs-storage';
 import path from "path";
 import { uploadImage } from "../controllers/upload-image.controller.js"
 const router = Router()
