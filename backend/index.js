@@ -6,16 +6,7 @@ import Sockets from "./sockets.js";
 import Grid from 'gridfs-stream';
 import mongoose from "mongoose";
 
-const mongoDBConnection = connectDB();
-let gfs
-
-//init Grid stream
-mongoDBConnection.once('open', () => {
-  gfs = Grid(mongoDBConnection.db, mongoose.mongo);
-  gfs.collection('uploads');
-});
-//init Grid stream
-
+connectDB();
 const server = http.createServer(app);
 const httpServer = server.listen(3001);
 const io = new WebSocketServer(httpServer,{
