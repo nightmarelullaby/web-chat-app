@@ -3,7 +3,6 @@ import app from "./app.js";
 import { connectDB } from "./db.js";
 import http from "http";
 import Sockets from "./sockets.js";
-import Grid from 'gridfs-stream';
 import mongoose from "mongoose";
 
 connectDB();
