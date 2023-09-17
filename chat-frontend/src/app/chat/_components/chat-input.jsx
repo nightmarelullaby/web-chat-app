@@ -25,10 +25,15 @@ export const ChatInput = ({onSubmit,onClickEmoji}) =>{
 
   useEffect(()=>{
     (async () =>{
-      const emojiURL = 'https://cdn.jsdelivr.net/npm/@emoji-mart/data'
-      const response = await fetch(emojiURL)
-      const json = await response.json()
-      return setEmojiData(json)
+      try{
+        const emojiURL = 'https://cdn.jsdelivr.net/npm/@emoji-mart/data'
+        const response = await fetch(emojiURL)
+        const json = await response.json()
+        console.log(json)
+        return setEmojiData(json)  
+      }catch(error){
+        console.log("fetch data error",error.message)
+      }
     })()
   },[])
   return <Flex borderTopColor="gray.300" borderWidth=".5px 0 0 0 " bg="gray.100" direction="column">
