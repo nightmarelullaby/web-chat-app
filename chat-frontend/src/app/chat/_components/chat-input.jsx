@@ -2,8 +2,8 @@
 import {IconPlus,IconMoodHappy,IconBrandTelegram,IconPaperclip} from '@tabler/icons-react';
 import {Button,Skeleton,Img,InputGroup,Box,Input,HStack,Flex,FormLabel} from "@/components/chakra-client/components"
 import { Field, Form, Formik } from 'formik';
-import {useState,useRef} from "react"
-import data from '@emoji-mart/data'
+import {useState,useRef,useEffect} from "react"
+// import data from '@emoji-mart/data'
 import dynamic from 'next/dynamic'
 import convertToBase64 from "@/utils/convertToBase64"
 const Picker = dynamic(() => import('@emoji-mart/react'), {
@@ -17,10 +17,20 @@ const Picker = dynamic(() => import('@emoji-mart/react'), {
  });
 
 export const ChatInput = ({onSubmit,onClickEmoji}) =>{
+  const [emojiData,setEmojiData] = useState()
   const [emojiPickerVisible,setEmojiPickerVisible] = useState(false)
   const [images,setImages] = useState([])
   const [imageLoading,setImageLoading] = useState(false)
   const imageInputRef = useRef()
+
+  useEffect(()=>{
+    (async () =>{
+      const emojiURL = 'https://cdn.jsdelivr.net/npm/@emoji-mart/data'
+      const response = await fetch(emojiURL)
+      const json = await response.json()
+      return setEmojiData(json)
+    })()
+  },[])
   return <Flex borderTopColor="gray.300" borderWidth=".5px 0 0 0 " bg="gray.100" direction="column">
      <Formik 
           validationSchema={InputSchema}
@@ -95,7 +105,7 @@ export const ChatInput = ({onSubmit,onClickEmoji}) =>{
         </Box>
         <Box position="relative">
         {emojiPickerVisible && <Box position="absolute" zIndex="100" bottom="40px" left="0">
-          <Picker data={data} emojiSize={24} onEmojiSelect={(e)=>{
+          <Picker data={emojiData} emojiSize={24} onEmojiSelect={(e)=>{
               let sym = e.unified.split('-')
               let codesArray = []
               sym.forEach(el => codesArray.push('0x' + el))
