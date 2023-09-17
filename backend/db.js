@@ -1,14 +1,12 @@
 import mongoose from "mongoose";
-const mongouri = "mongodb+srv://nightmarelullaby:2860960Nierautomata@cluster0.5e8lqjx.mongodb.net/chat?retryWrites=true&w=majority"
-
+import { MONGODB_URI } from "./config";
 
 export const connectDB = async () => {
   try {
-    await mongoose.connect(
-      mongouri,
-      { useNewUrlParser: true, useUnifiedTopology: true }
-    );
-    console.log("MongoDB is connected");
+    const mongoDBConnection = await mongoose.connect(
+      MONGODB_URI,{ useNewUrlParser: true, useUnifiedTopology: true });
+    return mongoDBConnection
+    
   } catch (error) {
     console.error(error);
   }

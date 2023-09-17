@@ -57,7 +57,7 @@ export const ChatInput = ({onSubmit,onClickEmoji}) =>{
                   </>
               )}
             </HStack>
-            <Field name="images" >
+            <Field name="image" >
               {({ field, form}) => (
                 <Input 
                 visibility="hidden"
@@ -74,11 +74,11 @@ export const ChatInput = ({onSubmit,onClickEmoji}) =>{
                 type="file" 
                 placeholder="Send message to" 
                 onChange={async (e)=> {
-                  console.log(e.target.files[0])
+                  const img = e.target.files[0]
                   setImageLoading(true)
-                  const image = await convertToBase64(e.target.files[0])
+                  const image = await convertToBase64(img)
                   if(images.includes(image)) return setImageLoading(false)
-                  form.setFieldValue("images",[values.images,image])
+                  form.setFieldValue("image",img)
                   setImages(prev => prev.concat(image))
                   return setImageLoading(false)
                 }}/>)}

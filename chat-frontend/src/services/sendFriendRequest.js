@@ -5,12 +5,7 @@ export const sendFriendRequest = async (id) => {
   	method: "POST",
   	body:JSON.stringify(bodyContent),
 	});
-
 	const json = await response.json()
-	console.log(json)
 	return json
-	
-
-
 }
 

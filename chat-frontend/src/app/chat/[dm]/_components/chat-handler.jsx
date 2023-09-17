@@ -9,6 +9,7 @@ import {useUserInformationStore} from "@/store/useUserInformationStore"
 import {useCurrentMessages} from "@/store/useCurrentMessages"
 import {useChatScroll} from "@/hooks/useChatScroll"
 import moment from "moment"
+import { uploadImage } from "@/services/uploadImage"
 
 export default function ChatHandler({response,id}){
 	const [currentMessages,setCurrentMessages] = useState(response.messages)	
@@ -23,23 +24,27 @@ export default function ChatHandler({response,id}){
 	}
 	useEffect(() => {
 		if(!currentSocket) return
-
 			currentSocket.on("server:added-message",handleAddMessages)
-
 			return () => {
 				currentSocket.off("server:added-message",handleAddMessages)
 			}
 	},[currentSocket])
 
-	const handleSubmit = (values,actions) => {
-		const {input,images} = values
-		if(input === "" && images.length === 0) return;
+	const handleSubmit = async (values,actions) => {
+		const {input,image} = values
+
+		const formData = new FormData()
+		formData.append("image",image)
+
+		const uploadImageResponse = await uploadImage(formData)
+		
+		if(input === "" && image.length === 0) return;
 		let bodyContent = {
 			authorId:_id,
 			content:input,
 			username,
 			chatId:response._id,
-			images:images
+			images:[]
 		}
 		currentSocket.emit("client:add-message",bodyContent)
 		return actions.resetForm()
