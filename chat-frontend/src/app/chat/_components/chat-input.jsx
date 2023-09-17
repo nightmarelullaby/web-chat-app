@@ -3,7 +3,6 @@ import {IconPlus,IconMoodHappy,IconBrandTelegram,IconPaperclip} from '@tabler/ic
 import {Button,Skeleton,Img,InputGroup,Box,Input,HStack,Flex,FormLabel} from "@/components/chakra-client/components"
 import { Field, Form, Formik } from 'formik';
 import {useState,useRef,useEffect,lazy} from "react"
-// import data from '@emoji-mart/data'
 import dynamic from 'next/dynamic'
 import convertToBase64 from "@/utils/convertToBase64"
 import EmojiPicker from "@/lib/emoji-mart"
