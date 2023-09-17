@@ -6,14 +6,6 @@ import chatRoutes from "./routes/chat.routes.js"
 import friendRoutes from "./routes/friends.routes.js"
 import uploadRoutes from "./routes/upload-files.js"
 import cookieParser from "cookie-parser";
-import path from 'path';
-import crypto from 'crypto';
-import mongoose from 'mongoose';
-import multer from 'multer';
-import GridFsStorage from 'multer-gridfs-storage';
-import Grid from 'gridfs-stream';
-import methodOverride from 'method-override';
-
 const app = express()
 app.use(cookieParser())
 
