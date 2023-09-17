@@ -60,7 +60,7 @@ const updateFriendRequestStatus = async (req, res) => {
         const { status, toUser, friendRequestId } = req.body;
         const authorId = req.user.id
         if(!status || !toUser || !friendRequestId || !authorId) return res.status(400).json({message:"Bad request"})
-        
+        const authorData = await User.findById(authorId)
         if (status === "deny") {
             const deletedRequest = await friendRequest.findByIdAndRemove(friendRequestId)
             if(!deletedRequest) return res.status(400).json({message:"not found!"})
@@ -70,7 +70,7 @@ const updateFriendRequestStatus = async (req, res) => {
             const authorRemoved = await User.findByIdAndUpdate(authorId, {
                 "$pull": { friendRequests: new Types.ObjectId(friendRequestId) }
             })
-            const authorData = await User.findById(authorId)
+
 
             if (!authorData || !toUserData) return res.status(400).json({ message: "User not found" })
 
