@@ -3,7 +3,7 @@ import { MONGODB_URI } from "../config.js";
 import crypto from 'crypto';
 import GridFsStorage from 'multer-gridfs-storage';
 import path from "path";
-import { uploadImage } from "../controllers/upload-image.controller"
+import { uploadImage } from "../controllers/upload-image.controller.js"
 const router = Router()
 //Init grid engine
 const storage = new GridFsStorage({
