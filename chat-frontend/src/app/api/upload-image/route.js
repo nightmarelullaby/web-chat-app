@@ -10,7 +10,7 @@ export async function POST(req,res){
     let headersList = {
         "Accept": "*/*",
         "Cookie":"token="+value,
-        "Content-Type": "multipart/form-data",
+        // "Content-Type": "multipart/form-data",
     }
     let response = await fetch(process.env.LOCAL_BACKEND+"/api/upload-image", { 
         method: "POST",
