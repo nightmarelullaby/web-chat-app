@@ -19,3 +19,4 @@ export const connectDB = async () => {
     console.error(error);
   }
 };
+export {gfs}

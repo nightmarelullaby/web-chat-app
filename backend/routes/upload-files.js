@@ -5,8 +5,10 @@ import {GridFsStorage} from 'multer-gridfs-storage';
 import path from "path";
 import multer from 'multer';
 import { uploadImage } from "../controllers/upload-image.controller.js"
+import {gfs} from "../db.js"
 const router = Router()
 //Init grid engine
+
 const storage = new GridFsStorage({
     url: MONGODB_URI,
     file: (req, file) => {
