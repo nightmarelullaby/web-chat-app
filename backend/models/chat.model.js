@@ -7,6 +7,9 @@ const messageSchema = new Schema({
     images:{
         type:Array
     },
+    username:{
+        type:String
+    },
     authorId:{
         type:Schema.Types.ObjectId,
         ref:"user",

@@ -13,6 +13,7 @@ export default (io) => {
             const newMessage = new Message({
                 content:data.content,
                 authorId:data.authorId,
+                username:data.username,
                 images:data.images
             })
             io.to(data.chatId.toString()).emit("server:added-message",newMessage);
