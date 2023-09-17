@@ -37,6 +37,7 @@ export default function ChatHandler({response,id}){
 		formData.append("image",image)
 
 		const uploadImageResponse = await uploadImage(formData)
+		console.log(uploadImageResponse)
 		
 		if(input === "" && image.length === 0) return;
 		let bodyContent = {

@@ -3,7 +3,7 @@ import {cookies} from "next/headers";
 	
 	
 
-export async function PUT(req,res){
+export async function POST(req,res){
 	const cookieStore = cookies();
   const {value} = cookieStore.get("token");
   const body = await req.json()
@@ -23,7 +23,7 @@ export async function PUT(req,res){
 		}}
 	
 	let response = await fetch(process.env.LOCAL_BACKEND+"/api/updateFriendRequestStatus", { 
-	  method: "PUT",
+	  method: "POST",
 	  headers: headersList,
 	  body:JSON.stringify(bodyContent),
 	});
