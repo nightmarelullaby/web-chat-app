@@ -24,7 +24,6 @@ const chatSchema = new Schema({
         type: Array,
         required: true,
         trim: true,
-        unique:true,
         default: [{
             type: Schema.Types.ObjectId,
             ref: "User"
