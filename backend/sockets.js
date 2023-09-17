@@ -18,7 +18,8 @@ export default (io) => {
             })
             io.to(data.chatId.toString()).emit("server:added-message",newMessage);
             const messageAdded = await newMessage.save()
-            return const chatFound = await Chat.findByIdAndUpdate(data.chatId,{"$push":{messages:messageAdded}},{new:true})
+            const chatUpdated = await Chat.findByIdAndUpdate(data.chatId,{"$push":{messages:messageAdded}},{new:true})
+            return;
         })
 
         socket.on('client:join-chat', async (data) => {
