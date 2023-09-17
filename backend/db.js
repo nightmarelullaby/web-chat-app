@@ -14,8 +14,7 @@ export const connectDB = async () => {
       gfs.collection('uploads');
     });
     //init Grid stream
-    return mongoDBConnection
-    
+    console.log("MongoDB started")
   } catch (error) {
     console.error(error);
   }
