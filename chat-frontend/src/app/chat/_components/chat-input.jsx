@@ -118,7 +118,8 @@ export const ChatInput = ({onSubmit,onClickEmoji}) =>{
         </Box>}
         <Box as="button" onClick={(e)=> {
           e.preventDefault()
-          return setEmojiPickerVisible(prev => !prev)
+          console.log("click!")
+          return setEmojiPickerVisible(!emojiPickerVisible)
         }} 
         cursor="pointer" bg="gray.100" borderColor="gray.400" borderWidth=".5px" borderRadius="100%" p="1" boxSizing="border-box">
 
