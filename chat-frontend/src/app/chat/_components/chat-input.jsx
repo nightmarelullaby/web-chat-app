@@ -94,7 +94,7 @@ export const ChatInput = ({onSubmit,onClickEmoji}) =>{
         />
         </Box>
         <Box position="relative">
-        {emojiPickerVisible && <Box position="absolute" bottom="40px" left="0">
+        {emojiPickerVisible && <Box position="absolute" zIndex="100" bottom="40px" left="0">
           <Picker data={data} emojiSize={24} onEmojiSelect={(e)=>{
               let sym = e.unified.split('-')
               let codesArray = []
@@ -104,7 +104,7 @@ export const ChatInput = ({onSubmit,onClickEmoji}) =>{
            />
         </Box>}
         <Box as="button" onClick={(e)=> {
-          e.preventDefault()
+          // e.preventDefault()
           return setEmojiPickerVisible(prev => !prev)
         }} 
         cursor="pointer" bg="gray.100" borderColor="gray.400" borderWidth=".5px" borderRadius="100%" p="1" boxSizing="border-box">
