@@ -78,7 +78,7 @@ const updateFriendRequestStatus = async (req, res) => {
 
         }
         if (status === "accept") {
-            const deletedRequest = await friendRequest.findByIdAndRemove(friendRequestId);
+            // const deletedRequest = await friendRequest.findByIdAndRemove(friendRequestId);
             if(!deletedRequest) return res.status(400).json({message:"not found!"});
             const newChat = new Chat({
                     users: [new Types.ObjectId(authorId), new Types.ObjectId(toUser.id)],
