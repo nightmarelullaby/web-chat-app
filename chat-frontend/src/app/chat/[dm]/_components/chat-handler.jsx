@@ -37,6 +37,7 @@ export default function ChatHandler({response,id}){
 		let bodyContent = {
 			authorId:_id,
 			content:input,
+			username,
 			chatId:response._id,
 			images:images
 		}
@@ -48,7 +49,7 @@ export default function ChatHandler({response,id}){
       <ChatContainerHeader status={headerUserStatus} title={headerUserTitle} />
       <Flex ref={ref} direction="column" height="100%" p="4" gap="4" bg="white" mt="auto" overflowY="scroll">
       {console.log(currentMessages)}
-        {Array.isArray(currentMessages) && currentMessages.map(message => <ChatMessage images={message?.images} sender={message.authorId.username === username ? true: false} content={message.content} date={moment(message.date).calendar()} author={message.authorId.username}/>)}
+        {Array.isArray(currentMessages) && currentMessages.map(message => <ChatMessage images={message?.images} sender={message.username === username ? true: false} content={message.content} date={moment(message.date).calendar()} author={message.username}/>)}
       
       </Flex>
 
