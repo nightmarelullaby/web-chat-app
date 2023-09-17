@@ -6,9 +6,7 @@ import {useState,useRef,useEffect} from "react"
 // import data from '@emoji-mart/data'
 import dynamic from 'next/dynamic'
 import convertToBase64 from "@/utils/convertToBase64"
-const Picker = dynamic(() => import('@emoji-mart/react'), {
-  ssr:true
-})
+import Picker from '@emoji-mart/react'
  import * as Yup from 'yup';
  const InputSchema = Yup.object().shape({
     input:Yup.string()
