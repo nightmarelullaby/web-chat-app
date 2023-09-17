@@ -6,7 +6,9 @@ import chatRoutes from "./routes/chat.routes.js"
 import friendRoutes from "./routes/friends.routes.js"
 import uploadRoutes from "./routes/upload-files.js"
 import cookieParser from "cookie-parser";
+import methodOverride from 'method-override';
 const app = express()
+app.use(methodOverride('_method'));
 app.use(cookieParser())
 
 app.use(cors({
