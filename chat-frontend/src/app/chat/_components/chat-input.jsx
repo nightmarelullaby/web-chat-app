@@ -2,11 +2,12 @@
 import {IconPlus,IconMoodHappy,IconBrandTelegram,IconPaperclip} from '@tabler/icons-react';
 import {Button,Skeleton,Img,InputGroup,Box,Input,HStack,Flex,FormLabel} from "@/components/chakra-client/components"
 import { Field, Form, Formik } from 'formik';
-import {useState,useRef,useEffect} from "react"
+import {useState,useRef,useEffect,lazy} from "react"
 // import data from '@emoji-mart/data'
 import dynamic from 'next/dynamic'
 import convertToBase64 from "@/utils/convertToBase64"
-import Picker from '@emoji-mart/react'
+import EmojiPicker from "@/lib/emoji-mart"
+
  import * as Yup from 'yup';
  const InputSchema = Yup.object().shape({
     input:Yup.string()
@@ -108,7 +109,7 @@ export const ChatInput = ({onSubmit,onClickEmoji}) =>{
         </Box>
         <Box position="relative">
         {emojiPickerVisible && <Box position="absolute" zIndex="100" bottom="40px" left="0">
-          <Picker data={emojiData} emojiSize={24} onEmojiSelect={(e)=>{
+          <EmojiPicker data={emojiData} emojiSize={24} onEmojiSelect={(e)=>{
               let sym = e.unified.split('-')
               let codesArray = []
               sym.forEach(el => codesArray.push('0x' + el))
