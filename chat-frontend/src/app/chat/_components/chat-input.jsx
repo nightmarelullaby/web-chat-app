@@ -7,7 +7,7 @@ import data from '@emoji-mart/data'
 import dynamic from 'next/dynamic'
 import convertToBase64 from "@/utils/convertToBase64"
 const Picker = dynamic(() => import('@emoji-mart/react'), {
-  ssr:false
+  ssr:true
 })
  import * as Yup from 'yup';
  const InputSchema = Yup.object().shape({
@@ -104,7 +104,7 @@ export const ChatInput = ({onSubmit,onClickEmoji}) =>{
            />
         </Box>}
         <Box as="button" onClick={(e)=> {
-          // e.preventDefault()
+          e.preventDefault()
           return setEmojiPickerVisible(prev => !prev)
         }} 
         cursor="pointer" bg="gray.100" borderColor="gray.400" borderWidth=".5px" borderRadius="100%" p="1" boxSizing="border-box">
