@@ -12,6 +12,7 @@ export const connectDB = async () => {
     db.once('open', () => {
       gfs = Grid(db.db, mongoose.mongo);
       gfs.collection('uploads');
+      console.log("gfs started",gfs)
     });
     //init Grid stream
     console.log("MongoDB started")
