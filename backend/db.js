@@ -3,21 +3,36 @@ import { MONGODB_URI } from "./config.js";
 import Grid from 'gridfs-stream';
 
 let gfs
-
+let bucket
+export const initGridStream = async (db,mongoose) => {
+    bucket = new mongoose.mongo.GridFSBucket(db.db,{bucketName:"uploads"})
+    console.log(bucket)
+      try{
+        gfs = Grid(db.db, mongoose.mongo);
+        gfs.collection('uploads');
+        console.log("Grid stream started")
+      }catch(error){
+        throw new Error(error)
+      }
+}
 export const connectDB = async () => {
   try {
-    const mongoDBConnection = await mongoose.connect(MONGODB_URI,{ useNewUrlParser: true, useUnifiedTopology: true });
+    const mongoDBConnection = mongoose.connect(MONGODB_URI,{ useNewUrlParser: true, useUnifiedTopology: true });
     var db = mongoose.connection;
+
     //init Grid stream
-    db.once('open', () => {
-      gfs = Grid(db.db, mongoose.mongo);
-      gfs.collection('uploads');
-      console.log("gfs started",gfs)
+    mongoose.connection.once('open', () => {  
+      initGridStream(db,mongoose)
     });
-    //init Grid stream
-    console.log("MongoDB started")
+    mongoose.connection.on("connected",()=> {
+          console.log("MongoDB started")
+    })
+    mongoose.connection.on('error', err => {
+       console.log('Mongoose Default Connection Error : ' + err);
+    });
+
   } catch (error) {
-    console.error(error);
+    console.error(error.message,"heree");
   }
 };
-export {gfs}
+export {gfs,bucket}

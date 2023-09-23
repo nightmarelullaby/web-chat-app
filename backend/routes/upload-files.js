@@ -4,8 +4,9 @@ import crypto from 'crypto';
 import {GridFsStorage} from 'multer-gridfs-storage';
 import path from "path";
 import multer from 'multer';
+import mongoose from "mongoose";
 import { uploadImage } from "../controllers/upload-image.controller.js"
-import {gfs} from "../db.js"
+import {gfs,bucket} from "../db.js"
 const router = Router()
 //Init grid engine
 
@@ -30,27 +31,41 @@ const storage = new GridFsStorage({
 
 const upload = multer({ storage });
 
-router.get('/image/:filename', (req, res) => {
-  gfs.files.findOne({ filename: req.params.filename }, (err, file) => {
-    // Check if file
+router.get('/image/:filename', async (req, res) => {
+  // console.log(req.params)
+  // console.log(gfs.files.findOne({ filename: req.params.filename },(err,file) => console.log(file)).then(res => console.log(res)))
+  gfs.files.findOne({ filename: req.params.filename }).then(async (file )=> {
+    // Check if file exists
     if (!file || file.length === 0) {
       return res.status(404).json({
         err: 'No file exists'
       });
     }
 
-    // Check if image
+    // Check if its image
     if (file.contentType === 'image/jpeg' || file.contentType === 'image/png') {
-      // Read output to browser
-      const readstream = gfs.createReadStream(file.filename);
-      readstream.pipe(res);
+
+      //creat new stream
+      const stream = bucket.openDownloadStreamByName(file.filename)
+
+      stream.on('data',chunk => {
+        res.write(chunk)
+      })
+      stream.on('error',chunk => {
+        res.status(400).json({message:"There was an error"})
+      })
+      stream.on('end',chunk => {
+        res.end()
+      })
+      // x.pipe(res)
+      // readstream.pipe(res);
     } else {
       res.status(404).json({
         err: 'Not an image'
       });
     }
   });
-});
+  })
 
 router.post('/upload-image',upload.single('image'),(req,res) => {
     return res.json({message:"image uploaded"})
