@@ -69,7 +69,7 @@ export default function ChatHandler({response,id}){
 				content:input,
 				username,
 				chatId:response._id,
-				images:["http://localhost:3001/api/image/"+uploadImageResponse.message]
+				images:[process.env.NEXT_PUBLIC_IMAGES_API+uploadImageResponse.message]
 			}
 		} else{
 			bodyContent = {
@@ -87,7 +87,7 @@ export default function ChatHandler({response,id}){
 
 	return(
 		<Flex height="100%" direction="column">
-      <ChatContainerHeader status={headerUserStatus} profileImage={"http://localhost:3001/api/image/"+profileImage} title={headerUserTitle} />
+      <ChatContainerHeader status={headerUserStatus} profileImage={process.env.NEXT_PUBLIC_IMAGES_API+profileImage} title={headerUserTitle} />
       <ChatMessagesRender username={username} currentMessages={currentMessages}/>
       <ChatInput onSubmit={handleSubmit}/>
     </Flex> 
