@@ -32,8 +32,7 @@ const storage = new GridFsStorage({
 const upload = multer({ storage });
 
 router.get('/image/:filename', async (req, res) => {
-  // console.log(req.params)
-  // console.log(gfs.files.findOne({ filename: req.params.filename },(err,file) => console.log(file)).then(res => console.log(res)))
+
   gfs.files.findOne({ filename: req.params.filename }).then(async (file )=> {
     // Check if file exists
     if (!file || file.length === 0) {
@@ -57,8 +56,6 @@ router.get('/image/:filename', async (req, res) => {
       stream.on('end',chunk => {
         res.end()
       })
-      // x.pipe(res)
-      // readstream.pipe(res);
     } else {
       res.status(404).json({
         err: 'Not an image'
@@ -68,6 +65,6 @@ router.get('/image/:filename', async (req, res) => {
   })
 
 router.post('/upload-image',upload.single('image'),(req,res) => {
-    return res.json({message:"image uploaded"})
+    return res.json({message:req.file.filename})
 })
 export default router

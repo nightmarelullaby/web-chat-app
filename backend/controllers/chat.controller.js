@@ -69,7 +69,7 @@ const getChatById = async (req, res) => {
     try {
         const chatId = req.params.id
 
-        const chat = await Chat.findById(chatId).populate({path:"users",model:"User",select:"username status"}).populate({path:"messages",populate:{path:"authorId",model:"User"}})
+        const chat = await Chat.findById(chatId).populate({path:"users",model:"User",select:"username status profileImage"}).populate({path:"messages",populate:{path:"authorId",model:"User"}})
         if (!chat) return res.status(404).json({ message: "Chat not found" })
         return res.json(chat)
     }

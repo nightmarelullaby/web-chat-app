@@ -2,6 +2,7 @@
 import {Button,Tabs, TabList, TabPanels,Divider, Tab, TabPanel,Grid,Box,GridItem,VStack,HStack,Center,Text,Flex} from "@/components/chakra-client/components"
 import { UpperBar } from './upper-bar';
 import {IconFriends} from '@tabler/icons-react';
+import convertToBase64 from "@/utils/convertToBase64"
 import { Sidebar } from './sidebar';
 import {useRouter} from "next/navigation"
 import Link from "next/link"
@@ -10,22 +11,25 @@ import {FriendsList} from "./friend-list"
 import UserDropdown from "@/components/user-dropdown/user-dropdown"
 import NotificationsWrapper from "./notifications-wrapper"
 import moment from "moment"
+import { uploadImage } from "@/services/uploadImage"
 import {useSocketStore} from "@/store/useSocketStore"
 import {useUserInformationStore} from "@/store/useUserInformationStore"
 export default function LayoutStore({children}){
     const {currentSocket} = useSocketStore()
-	const {status,_id,chats,username} = useUserInformationStore()
-    console.log(useUserInformationStore.getState())
+	const {status,_id,chats,username,profileImage} = useUserInformationStore()
+    console.log(profileImage)
     const chatsFiltered = chats?.map((chat,index) => {
         let [users] = chat?.users?.filter(i => i._id !== _id)
         if(!users) return {
             lastMessage:{content:"",date:""},
             id:chat._id,
+            profileImage:users.profileImage,
             username:users.username,
         }
         return { 
             lastMessage:{content:chat.messages[0]?.content,date:moment(new Date(chat.messages[0]?.date)).startOf('day').fromNow()},
             id:chat._id,
+            profileImage:users.profileImage,
             username:users.username,
          }
     })
@@ -35,7 +39,17 @@ export default function LayoutStore({children}){
 <GridItem bg="gray.50" position="relative" zIndex="9999999" borderBottomColor="gray.200" borderWidth="0 0 .5px 0" py="4" area={'header'} px="4">
 <UpperBar  >
     <NotificationsWrapper />
-    <UserDropdown status={status} 
+    <UserDropdown 
+    profileImage={"http://localhost:3001/api/image/"+profileImage}
+    onAvatarClick={async (img)=>{
+    let formData = new FormData()
+    formData.append("image",img)
+    const imageUploaded = await uploadImage(formData)
+    let socketObj = {id:_id,filename:imageUploaded.message}
+    console.log(socketObj)
+    return currentSocket.emit("client:update-profile-image",socketObj)
+}}
+    status={status} 
     onClickActive={()=>{
         let obj = {id:_id,status:"Active"}
         return currentSocket.emit("client:update-status",obj)

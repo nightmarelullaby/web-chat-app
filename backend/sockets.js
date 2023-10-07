@@ -26,6 +26,14 @@ export default (io) => {
             let room = data.toString()
             socket.join(room)
         })
+        socket.on("client:update-profile-image",async(data) => {
+            const userId = data.id
+            const filename = data.filename
+            const profileImageUpdated = await User.findByIdAndUpdate(userId,{"$set":{profileImage:filename}},{new:true})
+            console.log(profileImageUpdated,"image udpoated")
+            if(!profileImageUpdated) return;            
+            socket.emit("server:profile-image-updated",profileImageUpdated)
+        })
     	socket.on("client:update-status",async(data) => {
             const userId = data.id
             const status = data.status

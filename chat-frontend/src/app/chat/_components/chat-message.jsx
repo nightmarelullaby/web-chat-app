@@ -14,10 +14,11 @@ export const ChatMessage = ({author,content,sender,date,images=[],sendingMessage
             <Text as="small" fontSize="12px" fontWeight="400"  color="gray.500" alignSelf="center" fontFamily="system-ui">{date}</Text>
           </HStack>
           <Box>
-          <Grid templateColumns='repeat(2, 1fr)' gap={2}>
-            {images.map(image => <Img h="100px" h="100px" objectFit="cover" src={image} /> )}
-          </Grid>
-          <Box bg="orange.100" display="flex" borderRadius="8" borderTopLeftRadius="0" p="2">
+          
+          <Box bg="orange.100" display="flex" flexDirection="column" borderRadius="8" borderTopLeftRadius="0" p="2">
+            <Grid templateColumns={`repeat(${images.length}, 1fr)`} gap={2}>
+              {images.map(image => <Img key={image} h="100px" h="100px" objectFit="cover" src={image} /> )}
+            </Grid>
             <Text as="p" display="inline-block" fontFamily="system-ui" fontSize="14px" fontWeight="600">
               {content}
             </Text>
@@ -50,10 +51,11 @@ export const ChatMessage = ({author,content,sender,date,images=[],sendingMessage
             <Text as="span" fontSize="14px" fontWeight="500" fontFamily="system-ui">{author}</Text>
           </HStack>
           <Box>
-          <Grid templateColumns='repeat(2, 1fr)' gap={2}>
-            {images.map(image => <Img h="100px" h="100px" objectFit="cover" src={image} /> )}
+          
+          <Box bg="orange.100" display="flex" flexDirection="column" justifyContent="end" borderRadius="8" borderTopRightRadius="0" p="2">
+          <Grid templateColumns={`repeat(${images.length}, 1fr)`} gap={2} mr="auto">
+            {images.map(image => <Img key={image} h="100px" h="100px" objectFit="cover" src={image} /> )}
           </Grid>
-          <Box bg="orange.100" display="flex" justifyContent="end" borderRadius="8" borderTopRightRadius="0" p="2">
             <Text as="p" display="inline-block" fontFamily="system-ui" fontSize="14px" fontWeight="600">
               {content}
             </Text>

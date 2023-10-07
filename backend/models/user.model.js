@@ -32,6 +32,9 @@ const userSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: "Chat"
     }],
+    profileImage:{
+          type: String,
+    },
     friendRequests: [{
         type: Schema.Types.ObjectId,
         ref: "friendRequest"

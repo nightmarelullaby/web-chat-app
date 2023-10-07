@@ -7,23 +7,24 @@ export default function LayoutChatEvents(){
 	const {currentSocket} = useSocketStore()
 
 	const handleNotificationReceived = (data) => {
-		console.log("new notification")
 		return useUserInformationStore.setState({friendRequests:[data]})
 	}
 
 	const handleStatusUpdated = (data) => {
-		const prev = useUserInformationStore.getState().friendRequests
 		return useUserInformationStore.setState(state => ({status:data.status}))
-
+	}
+	const handleProfileImageUpdated = (data) => {
+		return useUserInformationStore.setState(state => ({profileImage:data.profileImage}))
 	}
 	useEffect(() => {
-		console.log(currentSocket)
 		if(!currentSocket) return;
 		currentSocket.on("server:send-notification", handleNotificationReceived)
 		currentSocket.on("server:status-updated",handleStatusUpdated)
+		currentSocket.on("server:profile-image-updated",handleProfileImageUpdated)
 		return () => {
 			currentSocket.off("server:send-notification", handleNotificationReceived)
 			currentSocket.off("server:status-updated",handleStatusUpdated)
+			currentSocket.off("server:profile-image-updated",handleProfileImageUpdated)
 		}
 	},[currentSocket])
 	return null

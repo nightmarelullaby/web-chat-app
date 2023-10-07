@@ -10,7 +10,6 @@ export async function POST(req,res){
     let headersList = {
         "Accept": "*/*",
         "Cookie":"token="+value,
-        // "Content-Type": "multipart/form-data",
     }
     let response = await fetch(process.env.LOCAL_BACKEND+"/api/upload-image", { 
         method: "POST",
@@ -18,7 +17,8 @@ export async function POST(req,res){
         body:formData,
       });
     const json = await response.json()
-    if(response.response !== 200){
+    console.log(json)
+    if(response.status !== 200){
         return NextResponse.json({error:"error has ocurred"})
     }
     return NextResponse.json(json)    

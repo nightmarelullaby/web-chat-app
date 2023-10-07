@@ -6,10 +6,14 @@ import {useUserInformationStore} from "@/store/useUserInformationStore"
 import {useCurrentMessages} from "@/store/useCurrentMessages"
 
 export default function SocketRoomEvents({chatId}){
-    const {setCurrentSocket,currentSocket} = useSocketStore()
+    const {currentSocket} = useSocketStore()
+    
+    {/*--- Joining room based on chatId --- */}
     useEffect(() =>{
         if(!currentSocket) return;
         currentSocket.emit('client:join-chat',chatId)
     },[currentSocket])
+    {/*--- ----------------------------- ---*/}
+    
     return null
 }

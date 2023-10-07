@@ -3,7 +3,6 @@ export default async function convertToBase64(file,callback){
 		const reader = new FileReader()
 		reader.readAsDataURL(file)
 		reader.onload = () => {
-			console.log(reader.result)
 			res(reader.result)
 		}
 		reader.onerror = error => {
