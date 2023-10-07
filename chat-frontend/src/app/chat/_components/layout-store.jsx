@@ -40,7 +40,7 @@ export default function LayoutStore({children}){
 <UpperBar  >
     <NotificationsWrapper />
     <UserDropdown 
-    profileImage={"http://localhost:3001/api/image/"+profileImage}
+    profileImage={process.env.NEXT_PUBLIC_IMAGES_API+profileImage}
     onAvatarClick={async (img)=>{
     let formData = new FormData()
     formData.append("image",img)
