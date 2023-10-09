@@ -28,7 +28,6 @@ export default function ChatHandler({response,id}){
 
 
 	{/* --- Getting header chat info --- */}	
-	console.log(response.users)
 	const headerUserTitle = response.users.filter(user => user.username !== friendRequests)[0].username
 	const headerUserStatus = response.users.filter(user => user.username !== username)[0].status
 	const profileImage = response.users.filter(user => user.username !== username)[0].profileImage

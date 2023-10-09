@@ -46,7 +46,6 @@ export default function LayoutStore({children}){
     formData.append("image",img)
     const imageUploaded = await uploadImage(formData)
     let socketObj = {id:_id,filename:imageUploaded.message}
-    console.log(socketObj)
     return currentSocket.emit("client:update-profile-image",socketObj)
 }}
     status={status} 

@@ -8,7 +8,6 @@ export async function POST(req,res){
   const {value} = cookieStore.get("token");
   const body = await req.json()
   var data = body
-  console.log(data)
 	let headersList = {
  		"Accept": "*/*",
  		"Cookie":"token="+value,

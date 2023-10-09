@@ -9,7 +9,6 @@ export default function NotificationsWrapper(){
 	const [friendRequestsFiltered,setFriendRequestsFiltered] = useState(friendRequests.filter(notification => notification.from.username !== username))
 	const notificationsLength = friendRequestsFiltered.length
 	useEffect(()=>{
-		console.log(friendRequests)
 		setFriendRequestsFiltered(friendRequests.filter(notification => notification.from.username !== username))
 	},[friendRequests])
 
@@ -40,6 +39,7 @@ export default function NotificationsWrapper(){
           		}}}
               friendRequestId={notification._id} 
               id={notification._id} 
+              profileImage={notification.profileImage}
               type="friendRequest" 
               from={notification.from.username} 
               date={notification.date}/>
