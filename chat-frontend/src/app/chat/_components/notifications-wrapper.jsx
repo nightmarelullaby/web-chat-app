@@ -23,7 +23,6 @@ export default function NotificationsWrapper(){
           		onAccept={async ()=> { 
           			try{
           				const updateResponse = await updateFriendRequest("accept",notification._id,notification.from.id)
-          				console.log(updateResponse)
           				return setFriendRequestsFiltered(friendRequestsFiltered.filter(not => notification._id !== not._id))
           			}	
           			catch(error){

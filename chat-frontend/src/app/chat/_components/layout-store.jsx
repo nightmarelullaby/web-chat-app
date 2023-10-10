@@ -17,7 +17,6 @@ import {useUserInformationStore} from "@/store/useUserInformationStore"
 export default function LayoutStore({children}){
     const {currentSocket} = useSocketStore()
 	const {status,_id,chats,username,profileImage} = useUserInformationStore()
-    console.log(profileImage)
     const chatsFiltered = chats?.map((chat,index) => {
         let [users] = chat?.users?.filter(i => i._id !== _id)
         if(!users) return {

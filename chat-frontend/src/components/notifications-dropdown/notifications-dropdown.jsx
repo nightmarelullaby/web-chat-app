@@ -20,7 +20,7 @@ import {socket} from "@/socket"
 import { useOutsideClick } from '@chakra-ui/react'
 import UserDropdown from "@/components/user-dropdown/user-dropdown"
 
-export function NotificationElement({onAccept,onDeny,type="",from="test",date="22-22-2010",friendRequestId}){
+export function NotificationElement({profileImage,onAccept,onDeny,type="",from="test",date="22-22-2010",friendRequestId}){
     const [isSending,setIsSending] = useState(false)
     return <ListItem listStyleType="none" p="0">
     <Button w="100%" borderRadius="0" justifyContent="start" h="min-content" _hover={{bg:"gray.100"}} bg="transparent" p="2">
