@@ -43,7 +43,6 @@ export default function LoginForm(){
          {({handleSubmit,isSubmitting,values}) => (
 
           <Form onSubmit={handleSubmit}>
-        {console.log(isSubmitting)}
           <Field name="email" >
              {({ field, form}) => (
                 <FormControl isInvalid={form.errors.email && form.touched.email}>
