@@ -18,9 +18,9 @@ const Login = () => {
         <LoginForm />
             <HStack ml="4" mt="2">
               <Text as="p" fontSize="sm">Dont have an account?</Text>
-          <Link as={Link}  href="/auth/login">
+          <Link as={Link}  href="/auth/register">
             <Text as="p" fontSize="sm" color="purple.500" fontWeight="600" letterSpacing=".4px">
-              Sign in
+              Register
             </Text>
           </Link>
           </HStack>

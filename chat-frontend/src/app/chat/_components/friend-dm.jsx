@@ -2,7 +2,7 @@
 import {Button,VStack,HStack,Text,Avatar,AvatarBadge} from "@/components/chakra-client/components"
 
 
-export const FriendDM = ({profileImage,isNew=false,username="Jeon Song",lastTimeActive="22:21 p.m",lastMessage="i want to fuck with you"}) => {
+export const FriendDM = ({profileImage,isNew=false,username="",lastTimeActive="",lastMessage=""}) => {
   return(
     <Button w="100%" bg="transparent" py="6" justifyContent="start" role="group" gap="3" px="2" alignItems="center" _hover={{bg:"gray.200"}}>
       <Avatar size="sm" src={profileImage}>

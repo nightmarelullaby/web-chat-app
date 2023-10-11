@@ -4,6 +4,7 @@ import {useState} from "react"
 import {AcademicCap} from "@heroicons/react"
 import Link from "next/link" 
 import {loginUser} from "@/services/auth/loginUser"
+import {useRouter} from "next/navigation"
 import { Field, Form, Formik } from 'formik';
  import * as Yup from 'yup';
 
@@ -16,6 +17,7 @@ import { Field, Form, Formik } from 'formik';
  });
 
 export default function LoginForm(){
+  const router = useRouter()
   const [showPassword,setShowPassoword] = useState(false)
   const passwordVisibility = () => {
     return setShowPassoword(prev => !prev)
@@ -31,12 +33,11 @@ export default function LoginForm(){
               actions.setSubmitting(true)
               const response = await loginUser(values)
               actions.setSubmitting(false)
-              return console.log(response)
-              // return actions.resetForm()            
+              return actions.resetForm()            
+              router.push("/chat")
             }catch(error){
               console.log(error.message)
             }
-            // return actions.resetForm()            
           }}
         >
          {({handleSubmit,isSubmitting,values}) => (
@@ -84,7 +85,7 @@ export default function LoginForm(){
             _hover={{bg:"gray.600",outlineOffset:"-2px",outlineWidth:"1px",bg:"transparent",color:"gray.900",outlineColor:"gray.900"}}
             _loading={{bg:"gray.900",opacity:1}}
             type="submit">
-            Register
+            Log in
           </Button>
         </Form>)}
           
