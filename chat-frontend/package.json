@@ -20,6 +20,7 @@
     "cookie": "^0.5.0",
     "emoji-mart": "^5.5.2",
     "formik": "^2.4.3",
+    "jose": "^4.15.4",
     "js-cookie": "^3.0.5",
     "jwt-decode": "^3.1.2",
     "moment": "^2.29.4",
