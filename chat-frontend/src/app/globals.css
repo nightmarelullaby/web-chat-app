@@ -1,3 +1,14 @@
 body,html{
 	height:100vh;
 }
+*{
+	font-family: "GitLabSans";
+}
+@font-face {
+  		font-family: 'GitLabSans';
+  		src: url('/fonts/GitLabSans.woff2') format('woff2');
+	}
+@font-face {
+  		font-family: 'GitLabMono';
+  		src: url('/fonts/GitLabMono.woff2') format('woff2');
+	}

@@ -1,18 +1,34 @@
-import { NextResponse } from 'next/server';
-import type { NextRequest } from 'next/server';
- import {cookies} from "next/headers";
+import type {NextRequest} from "next/server";
+import type {NextFetchEvent} from "next/server";
 
-export const validateUser = async (token) => {
+import {NextResponse} from "next/server";
+import {decodeJwt} from "jose";
+export const runtime = "nodejs";
+
+const validateTokenExp = (exp) => {
+  const expToSeconds = Number(String(exp) + "000");
+  var now = new Date();
+  var nowIso = now.toISOString();
+  var nowInMilliseconds = Date.parse(nowIso);
+
+  if (expToSeconds < nowInMilliseconds) throw new Error("Token has expired");
+
+  return;
+};
+
+export const validateToken = async (token) => {    
   let headersList = {
     "Accept": "*/*",
     "Cookie":`token=${token}`,
     "Content-Type": "application/json"
   }
-let response = await fetch(process.env.LOCAL_BACKEND+ "/api/auth/verify", { 
-  method: "GET",
-  headers: headersList
-});
-if(response.status !== 200){
+
+  let response = await fetch(process.env.LOCAL_BACKEND+ "/api/auth/verify", { 
+    method: "GET",
+    headers: headersList
+  });
+
+  if(response.status !== 200){
     const {message} = await response.json()
     throw new Error("error!",message)
   } 
@@ -20,30 +36,43 @@ if(response.status !== 200){
   return responseParsed
 }
 
+export async function middleware(req: NextRequest, context: NextFetchEvent) {
+  const access_token = req.cookies.get("token");
 
-export async function middleware(req: NextRequest) {
-  const access_token = req.cookies.get("token")
-  if(!access_token){
+  if (!access_token) {
     const requestedPage = req.nextUrl.pathname;
     const url = req.nextUrl.clone();
+
     url.pathname = `/auth/login`;
+
     return NextResponse.redirect(url);
   }
-  if(access_token){
-    try{
-    const tokenValidation = await validateUser(access_token.value)
-    return NextResponse.next();
-    } catch(error){
-      const requestedPage = req.nextUrl.pathname;
-      const url = req.nextUrl.clone();
-      url.pathname = `/auth/login`;
-      return NextResponse.redirect(url);
-    }  
-  }
-  
 
+  try {
+    const decoded = decodeJwt(access_token.value);
+    const expValidation = validateTokenExp(decoded.exp);
+
+    context.waitUntil(
+      validateToken(access_token.value)
+        .then((response) => {
+          if (response.status !== 200) throw new Error("invalid token");
+        })
+        .catch((error) => {
+          throw new Error("There was an error");
+        }),
+    );
+
+    return NextResponse.next();
+  } catch (error) {
+    const requestedPage = req.nextUrl.pathname;
+    const url = req.nextUrl.clone();
+
+    url.pathname = `/auth/login`;
+
+    return NextResponse.redirect(url);
+  }
 }
-// See "Matching Paths" below to learn more
+
 export const config = {
-  matcher: ['/chat/:path*']
+  matcher: ["/chat/:path*"],
 };
