@@ -16,12 +16,12 @@ const Login = () => {
          <Img display={{sm:"none",md:"block"}} position="absolute" zIndex="-1" right="-20px" objectFit="cover" h="350px" w="273px" src="/images/sammy-line-seated-man-in-slippers.png" />
     </Box>
     <Box alignSelf="end" flexGrow={{base:"1",sm:"1",md:"1",lg:".2" }} width={{base:"100%",sm:"100%",md:"100%",lg:"inherit" }}  bg="transparent" zIndex="1" h="100vh" >
-      <VStack m="0" position="relative"  alignItems="end" minW={[200,500]}  h="100%" justifyContent="center" bg="white" p="4" transition="0s" borderLeftWidth={{base:"none",sm:"none",md:"1px"}} >
+      <VStack m="0" position="relative"  alignItems="end" minW={[200,500]}  h="100%" justifyContent="center" bg={{base:"transparent",sm:"transparent",md:"transparent",lg:"white"}} p="4" transition="0s" borderLeftWidth={{base:"none",sm:"none",md:"1px"}} >
       
       <VStack alignItems="start" ml="4" gap="0">
         
       </VStack>
-      <Img visibility={{base:"visible",sm:"visible",md:"visible",lg:"hidden"}} position="absolute" zIndex="1" top="0px" left="-20px" objectFit="cover" h="181px" w="106px" src="/images/girl-jumping.png" />
+      <Img visibility={{base:"visible",sm:"visible",md:"visible",lg:"hidden"}} position="absolute" zIndex="-1" top="0px" left="-20px" objectFit="cover" h="181px" w="106px" src="/images/girl-jumping.png" />
       <Box w="100%">
          
       
@@ -46,7 +46,7 @@ const Login = () => {
           </Link>
           </HStack>
       </Box>
-      <Img  visibility={{base:"visible",sm:"visible",md:"visible",lg:"hidden"}}  position="absolute" zIndex="1" right="-15px" bottom="-50px" objectFit="cover" h="150px" w="119px" src="/images/sammy-line-seated-man-in-slippers.png" />
+      <Img  visibility={{base:"visible",sm:"visible",md:"visible",lg:"hidden"}}  position="absolute" zIndex="-1" pointerEvents="none" right="-15px" bottom="-50px" objectFit="cover" h="150px" w="119px" src="/images/sammy-line-seated-man-in-slippers.png" />
       </VStack>
       
     </Box>

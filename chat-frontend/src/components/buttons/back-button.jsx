@@ -6,6 +6,6 @@ export const BackButton = ({...props}) => {
   const router = useRouter()
   console.log(router.back)
   return <Button variant="unstyled" onClick={()=>router.back({shallow:false})}{...props}> 
-  <ArrowLongLeftIcon style={{height:24,width:24}}/>
+  <ArrowLongLeftIcon style={{strokeWidth:.8,height:24,width:24}}/>
   </Button> 
 }

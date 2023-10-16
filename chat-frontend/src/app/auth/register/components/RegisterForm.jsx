@@ -79,7 +79,7 @@ export default function RegisterForm(){
     return setShowPassoword(prev => !prev)
   }
 	     return (
-        <Flex direction="column" gap="4" px="4">
+        <Flex direction="column" gap="4">
         <Formik 
           validationSchema={SignupSchema}
           initialValues={{ email: '',username:'',password:'',passwordConfirmation:'' }}
@@ -104,8 +104,8 @@ export default function RegisterForm(){
           <Field name="email" >
              {({ field, form}) => (
                 <FormControl isInvalid={form.errors.email && form.touched.email}>
-                  <FormLabel  fontSize="sm"  fontFamily="system-ui" color="gray.800" fontWeight="600" letterSpacing=".4px">Email address</FormLabel>
-                  <Input variant="outline_black" type="text" placeholder="Enter your email address" {...field} />
+                  <FormLabel  fontSize="sm" color="gray.800" fontWeight="600" letterSpacing=".4px">Email address</FormLabel>
+                  <Input  py={{base:"6",sm:"",md:"6",lg:"2"}} variant="outline_black" type="text" placeholder="Enter your email address" {...field} />
                   <FormErrorMessage>{form.errors.email}</FormErrorMessage>
                 </FormControl>
               )}
@@ -113,8 +113,8 @@ export default function RegisterForm(){
           <Field name="username" >
              {({ field, form}) => (
                 <FormControl mt="4"  isInvalid={form.errors.username && form.touched.username}>
-                  <FormLabel  fontSize="sm" fontFamily="system-ui" color="gray.800" fontWeight="600" letterSpacing=".4px">Username</FormLabel>
-                  <Input  variant="outline_black"  type="text" placeholder="Enter your email address" {...field} />
+                  <FormLabel  fontSize="sm" color="gray.800" fontWeight="600" letterSpacing=".4px">Username</FormLabel>
+                  <Input  py={{base:"6",sm:"6",md:"6",lg:"2"}} variant="outline_black"  type="text" placeholder="Enter your email address" {...field} />
                   <FormErrorMessage>{form.errors.username}</FormErrorMessage>
                 </FormControl>
               )}
@@ -123,9 +123,10 @@ export default function RegisterForm(){
 
              {({ field, form}) => (
                 <FormControl mt="4" isInvalid={form.errors.password && form.touched.password}>
-                   <FormLabel  fontFamily="system-ui" fontSize="sm" color="gray.800" fontWeight="600" letterSpacing=".4px">Password</FormLabel>
+                   <FormLabel fontSize="sm" color="gray.800" fontWeight="600" letterSpacing=".4px">Password</FormLabel>
                      <InputGroup size='md'>
                         <Input
+                         py={{base:"6",sm:"6",md:"6",lg:"2"}}
                           variant="outline_black" 
                           pr='4.5rem'
                           type={showPassword ? 'text' : 'password'}
@@ -148,9 +149,10 @@ export default function RegisterForm(){
             <Field name="passwordConfirmation" >
              {({ field, form}) => (
                 <FormControl mt="4"  isInvalid={form.errors.passwordConfirmation && form.touched.passwordConfirmation }>
-                   <FormLabel  fontSize="sm"  fontFamily="system-ui"  color="gray.800" fontWeight="600" letterSpacing=".4px">Password confirmation</FormLabel>
+                   <FormLabel  fontSize="sm" color="gray.800" fontWeight="600" letterSpacing=".4px">Password confirmation</FormLabel>
                      <InputGroup size='md'>
                         <Input
+                         py={{base:"6",sm:"6",md:"6",lg:"2"}}
                           variant="outline_black" 
                           pr='4.5rem'
                           type={showPassword ? 'text' : 'password'}
@@ -166,7 +168,7 @@ export default function RegisterForm(){
 
           <Button  
           mt="4"
-            width="100%" py="6" fontFamily="system-ui" bg="gray.900" color="white" letterSpacing=".4px" fontWeight="500" fontSize="sm"
+            width="100%" py="6" bg="gray.900" color="white" letterSpacing=".4px" fontWeight="500" fontSize="sm"
             transition=".15s ease"
             isLoading={isSubmitting}
             _hover={{bg:"gray.600",outlineOffset:"-2px",outlineWidth:"1px",bg:"transparent",color:"gray.900",outlineColor:"gray.900"}}
