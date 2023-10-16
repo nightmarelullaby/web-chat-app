@@ -38,13 +38,11 @@ export const validateToken = async (token) => {
 
 export async function middleware(req: NextRequest, context: NextFetchEvent) {
   const access_token = req.cookies.get("token");
+  const requestedPage = req.nextUrl.pathname;
+  const url = req.nextUrl.clone();
 
   if (!access_token) {
-    const requestedPage = req.nextUrl.pathname;
-    const url = req.nextUrl.clone();
-
     url.pathname = `/auth/login`;
-
     return NextResponse.redirect(url);
   }
 
@@ -61,14 +59,10 @@ export async function middleware(req: NextRequest, context: NextFetchEvent) {
           throw new Error("There was an error");
         }),
     );
-
+    url.pathname = `/chat`;
     return NextResponse.next();
   } catch (error) {
-    const requestedPage = req.nextUrl.pathname;
-    const url = req.nextUrl.clone();
-
     url.pathname = `/auth/login`;
-
     return NextResponse.redirect(url);
   }
 }
